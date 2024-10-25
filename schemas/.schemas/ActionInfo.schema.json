@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of your action. GitHub displays the name in the Actions tab to help visually identify actions in each job.",
+      "pattern": "^[A-Za-z .\\-_()]+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of the action.",
+      "pattern": "^[A-Za-z .\\-_()]+[^.]$"
+    },
+    "author": {
+      "type": "string",
+      "description": "The name of the action's author.",
+      "minLength": 1
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "slack": {
+          "type": "boolean",
+          "const": true
+        },
+        "gh-app": {
+          "type": "boolean",
+          "const": true
+        },
+        "gh-token": {
+          "type": "boolean",
+          "const": true
+        },
+        "fs": {
+          "type": "boolean",
+          "const": true
+        },
+        "cache": {
+          "type": "boolean",
+          "const": true
+        },
+        "config": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "additionalProperties": false,
+      "description": "Pre-defined set of features supported by Actions context plugins."
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "A string identifier to associate with the input",
+            "pattern": "^[a-z][a-z0-9-]+$"
+          },
+          "title": {
+            "type": "string",
+            "description": "A string title for documentation.",
+            "pattern": "^[A-Za-z \\-$]+$"
+          },
+          "summary": {
+            "type": "string",
+            "description": "A string summary of the input parameter.",
+            "pattern": "[^.]$"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "A longer description of the input parameter."
+          },
+          "default": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "A string representing the default value. Without this value, the input will mark as required"
+          },
+          "example": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "description": "A example value for setting this input value (e.g. ${{ secrets.EXAMPLE }})"
+          }
+        },
+        "required": [
+          "key"
+        ],
+        "additionalProperties": false,
+        "description": "The ActionInfo object for inputs field."
+      },
+      "description": "List of Actions input field.",
+      "uniqueItems": true
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "A string identifier to associate with the output.",
+            "pattern": "^[a-z][a-z0-9-]+$"
+          },
+          "description": {
+            "type": "string",
+            "description": "A string description of the output parameter.",
+            "pattern": "[^.]$"
+          }
+        },
+        "required": [
+          "key",
+          "description"
+        ],
+        "additionalProperties": false,
+        "description": "The ActionInfo object for outputs field."
+      },
+      "description": "List of Actions outputs field.",
+      "uniqueItems": true
+    },
+    "runs": {
+      "type": "object",
+      "properties": {
+        "pre-if": {
+          "type": "string",
+          "description": "Allows you to define conditions for the pre: action execution. https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runspre-if"
+        },
+        "post-if": {
+          "type": "string",
+          "description": "Allows you to define conditions for the post: action execution. https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runspost-if"
+        }
+      },
+      "additionalProperties": false,
+      "description": "The condition when runs should be executes."
+    }
+  },
+  "required": [
+    "name",
+    "description"
+  ],
+  "additionalProperties": false,
+  "description": "The json schema for _info.json file.\n\nThis is for generate actions information based on json file.",
+  "definitions": {}
+}

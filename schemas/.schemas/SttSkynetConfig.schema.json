@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "HelmDeployment"
+        },
+        "base": {
+          "type": "object",
+          "properties": {
+            "namespace": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "environments": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "version",
+        "kind",
+        "base"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "DockerPublish"
+        },
+        "base": {
+          "type": "object",
+          "properties": {
+            "dockerfile": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "environments": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "dockerfile": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "version",
+        "kind",
+        "base"
+      ],
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {}
+}
