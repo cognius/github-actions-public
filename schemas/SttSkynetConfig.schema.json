@@ -2,6 +2,20 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "anyOf": [
     {
+      "$ref": "#/definitions/StSnHelmDeploymentV1"
+    },
+    {
+      "$ref": "#/definitions/StSnKubeDeploymentV1"
+    },
+    {
+      "$ref": "#/definitions/StSnDockerPublishV1"
+    }
+  ],
+  "definitions": {
+    "StSnHelmDeploymentV1": {
+      "$ref": "#/definitions/StSnBaseConfig%3C%22v1%22%2C%22HelmDeployment%22%2CIStSnHelmDeploymentV1%3E"
+    },
+    "StSnBaseConfig<\"v1\",\"HelmDeployment\",IStSnHelmDeploymentV1>": {
       "type": "object",
       "properties": {
         "version": {
@@ -13,24 +27,12 @@
           "const": "HelmDeployment"
         },
         "base": {
-          "type": "object",
-          "properties": {
-            "namespace": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/IStSnHelmDeploymentV1"
         },
         "environments": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "namespace": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/definitions/IStSnHelmDeploymentV1"
           }
         }
       },
@@ -41,7 +43,69 @@
       ],
       "additionalProperties": false
     },
-    {
+    "IStSnHelmDeploymentV1": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "namespace"
+      ],
+      "additionalProperties": false
+    },
+    "StSnKubeDeploymentV1": {
+      "$ref": "#/definitions/StSnBaseConfig%3C%22v1%22%2C%22KubeDeployment%22%2CIStSnKubeDeploymentV1%3E"
+    },
+    "StSnBaseConfig<\"v1\",\"KubeDeployment\",IStSnKubeDeploymentV1>": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "KubeDeployment"
+        },
+        "base": {
+          "$ref": "#/definitions/IStSnKubeDeploymentV1"
+        },
+        "environments": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/IStSnKubeDeploymentV1"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "kind",
+        "base"
+      ],
+      "additionalProperties": false
+    },
+    "IStSnKubeDeploymentV1": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "namespace",
+        "directory"
+      ],
+      "additionalProperties": false
+    },
+    "StSnDockerPublishV1": {
+      "$ref": "#/definitions/StSnBaseConfig%3C%22v1%22%2C%22DockerPublish%22%2CIStSnDockerPublishV1%3E"
+    },
+    "StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1>": {
       "type": "object",
       "properties": {
         "version": {
@@ -53,24 +117,12 @@
           "const": "DockerPublish"
         },
         "base": {
-          "type": "object",
-          "properties": {
-            "dockerfile": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/IStSnDockerPublishV1"
         },
         "environments": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "dockerfile": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+            "$ref": "#/definitions/IStSnDockerPublishV1"
           }
         }
       },
@@ -80,7 +132,15 @@
         "base"
       ],
       "additionalProperties": false
+    },
+    "IStSnDockerPublishV1": {
+      "type": "object",
+      "properties": {
+        "dockerfile": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
-  ],
-  "definitions": {}
+  }
 }

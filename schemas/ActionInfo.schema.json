@@ -40,6 +40,22 @@
     "runs": {
       "$ref": "#/definitions/ActionInfoRuns",
       "description": "The condition when runs should be executes."
+    },
+    "permissions": {
+      "$ref": "#/definitions/ActionInfoPermissions",
+      "description": "The permissions needed to use actions"
+    },
+    "stepsPre": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ActionInfoSteps"
+      }
+    },
+    "stepsPost": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ActionInfoSteps"
+      }
     }
   },
   "required": [
@@ -79,6 +95,10 @@
           ]
         },
         "cli": {
+          "type": "boolean",
+          "const": true
+        },
+        "aws": {
           "type": "boolean",
           "const": true
         }
@@ -184,7 +204,8 @@
         }
       },
       "required": [
-        "key"
+        "key",
+        "summary"
       ],
       "additionalProperties": false,
       "description": "The ActionInfo object for inputs field."
@@ -224,6 +245,107 @@
       },
       "additionalProperties": false,
       "description": "The ActionInfo object for runs field."
+    },
+    "ActionInfoPermissions": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "read-all"
+        },
+        {
+          "type": "string",
+          "const": "write-all"
+        },
+        {
+          "$ref": "#/definitions/ActionInfoPermissionsObject"
+        }
+      ]
+    },
+    "ActionInfoPermissionsObject": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "attestations": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "checks": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "contents": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "deployments": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "discussions": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "id-token": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "issues": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "packages": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "pages": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "pull-requests": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "repository-projects": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "security-events": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "statuses": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PermissionsAccessLevel": {
+      "type": "string",
+      "enum": [
+        "read",
+        "write",
+        "none"
+      ]
+    },
+    "ActionInfoSteps": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uses": {
+          "type": "string"
+        },
+        "run": {
+          "type": "string"
+        },
+        "with": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
     }
   }
 }
