@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "env": {
+      "type": "string",
+      "description": "The environment of github actions"
+    },
+    "branch": {
+      "type": "string",
+      "description": "The branch of used github actions"
+    },
+    "name": {
+      "type": "string",
+      "description": "The github actions name"
+    },
+    "uses": {
+      "type": "string",
+      "description": "The uses string when you would like to use this actions"
+    },
+    "file": {
+      "type": "string",
+      "description": "The github action absolute file path"
+    },
+    "pkg": {
+      "type": "object",
+      "additionalProperties": {},
+      "description": "The github action package.json file"
+    }
+  },
+  "required": [
+    "env",
+    "branch",
+    "name",
+    "uses",
+    "file",
+    "pkg"
+  ],
+  "additionalProperties": false,
+  "description": "The GitHub Actions metadata when compiling actions",
+  "definitions": {}
+}
