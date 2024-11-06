@@ -13,7 +13,7 @@
   ],
   "definitions": {
     "StSnHelmDeploymentV1": {
-      "$ref": "#/definitions/StSnBaseConfig%3C%22v1%22%2C%22HelmDeployment%22%2CIStSnHelmDeploymentV1%3E"
+      "$ref": "#/definitions/StSnBaseConfig<\"v1\",\"HelmDeployment\",IStSnHelmDeploymentV1>"
     },
     "StSnBaseConfig<\"v1\",\"HelmDeployment\",IStSnHelmDeploymentV1>": {
       "type": "object",
@@ -56,7 +56,7 @@
       "additionalProperties": false
     },
     "StSnKubeDeploymentV1": {
-      "$ref": "#/definitions/StSnBaseConfig%3C%22v1%22%2C%22KubeDeployment%22%2CIStSnKubeDeploymentV1%3E"
+      "$ref": "#/definitions/StSnBaseConfig<\"v1\",\"KubeDeployment\",IStSnKubeDeploymentV1>"
     },
     "StSnBaseConfig<\"v1\",\"KubeDeployment\",IStSnKubeDeploymentV1>": {
       "type": "object",
@@ -103,7 +103,7 @@
       "additionalProperties": false
     },
     "StSnDockerPublishV1": {
-      "$ref": "#/definitions/StSnBaseConfig%3C%22v1%22%2C%22DockerPublish%22%2CIStSnDockerPublishV1%3E"
+      "$ref": "#/definitions/StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1>"
     },
     "StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1>": {
       "type": "object",
