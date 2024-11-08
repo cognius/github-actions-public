@@ -101,6 +101,16 @@
         "aws": {
           "type": "boolean",
           "const": true
+        },
+        "checkout": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/ActionInfoFeatureCheckout"
+            }
+          ]
         }
       },
       "additionalProperties": false,
@@ -138,6 +148,15 @@
           "items": {
             "type": "string"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ActionInfoFeatureCheckout": {
+      "type": "object",
+      "properties": {
+        "all": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false

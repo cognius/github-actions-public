@@ -18,14 +18,6 @@
     "StSnBaseConfig<\"v1\",\"HelmDeployment\",IStSnHelmDeploymentV1>": {
       "type": "object",
       "properties": {
-        "version": {
-          "type": "string",
-          "const": "v1"
-        },
-        "kind": {
-          "type": "string",
-          "const": "HelmDeployment"
-        },
         "base": {
           "$ref": "#/definitions/IStSnHelmDeploymentV1"
         },
@@ -34,12 +26,38 @@
           "additionalProperties": {
             "$ref": "#/definitions/IStSnHelmDeploymentV1"
           }
+        },
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "HelmDeployment"
+        },
+        "applications": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "$ref": "#/definitions/IStSnHelmDeploymentV1"
+              },
+              "environments": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/definitions/IStSnHelmDeploymentV1"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
         }
       },
       "required": [
-        "version",
+        "base",
         "kind",
-        "base"
+        "version"
       ],
       "additionalProperties": false
     },
@@ -61,14 +79,6 @@
     "StSnBaseConfig<\"v1\",\"KubeDeployment\",IStSnKubeDeploymentV1>": {
       "type": "object",
       "properties": {
-        "version": {
-          "type": "string",
-          "const": "v1"
-        },
-        "kind": {
-          "type": "string",
-          "const": "KubeDeployment"
-        },
         "base": {
           "$ref": "#/definitions/IStSnKubeDeploymentV1"
         },
@@ -77,12 +87,38 @@
           "additionalProperties": {
             "$ref": "#/definitions/IStSnKubeDeploymentV1"
           }
+        },
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "KubeDeployment"
+        },
+        "applications": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "$ref": "#/definitions/IStSnKubeDeploymentV1"
+              },
+              "environments": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/definitions/IStSnKubeDeploymentV1"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
         }
       },
       "required": [
-        "version",
+        "base",
         "kind",
-        "base"
+        "version"
       ],
       "additionalProperties": false
     },
@@ -103,11 +139,47 @@
       "additionalProperties": false
     },
     "StSnDockerPublishV1": {
-      "$ref": "#/definitions/StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1>"
+      "$ref": "#/definitions/StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1,alias-253622725-72908-73004-253622725-0-215038<def-interface-1791154026-52-750-1791154026-0-888>>"
     },
-    "StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1>": {
+    "StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1,alias-253622725-72908-73004-253622725-0-215038<def-interface-1791154026-52-750-1791154026-0-888>>": {
       "type": "object",
       "properties": {
+        "base": {
+          "$ref": "#/definitions/IStSnDockerPublishV1"
+        },
+        "environments": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "image": {
+                "type": "string",
+                "description": "The docker image name (do not included registry url).",
+                "default": "redis"
+              },
+              "registry": {
+                "type": "string",
+                "description": "The docker registry url."
+              },
+              "context": {
+                "type": "string",
+                "description": "The docker path context.",
+                "default": "working-directory"
+              },
+              "dockerfile": {
+                "type": "string",
+                "description": "The location of Dockerfile.",
+                "default": "Dockerfile on working directory"
+              },
+              "push": {
+                "type": "boolean",
+                "description": "Set to false, will build docker image, but not push to docker registry.",
+                "default": true
+              }
+            },
+            "additionalProperties": false
+          }
+        },
         "version": {
           "type": "string",
           "const": "v1"
@@ -116,30 +188,90 @@
           "type": "string",
           "const": "DockerPublish"
         },
-        "base": {
-          "$ref": "#/definitions/IStSnDockerPublishV1"
-        },
-        "environments": {
+        "applications": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/IStSnDockerPublishV1"
+            "type": "object",
+            "properties": {
+              "base": {
+                "$ref": "#/definitions/IStSnDockerPublishV1"
+              },
+              "environments": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "image": {
+                      "type": "string",
+                      "description": "The docker image name (do not included registry url).",
+                      "default": "redis"
+                    },
+                    "registry": {
+                      "type": "string",
+                      "description": "The docker registry url."
+                    },
+                    "context": {
+                      "type": "string",
+                      "description": "The docker path context.",
+                      "default": "working-directory"
+                    },
+                    "dockerfile": {
+                      "type": "string",
+                      "description": "The location of Dockerfile.",
+                      "default": "Dockerfile on working directory"
+                    },
+                    "push": {
+                      "type": "boolean",
+                      "description": "Set to false, will build docker image, but not push to docker registry.",
+                      "default": true
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
           }
         }
       },
       "required": [
-        "version",
+        "base",
         "kind",
-        "base"
+        "version"
       ],
       "additionalProperties": false
     },
     "IStSnDockerPublishV1": {
       "type": "object",
       "properties": {
+        "image": {
+          "type": "string",
+          "description": "The docker image name (do not included registry url).",
+          "default": "redis"
+        },
+        "registry": {
+          "type": "string",
+          "description": "The docker registry url."
+        },
+        "context": {
+          "type": "string",
+          "description": "The docker path context.",
+          "default": "working-directory"
+        },
         "dockerfile": {
-          "type": "string"
+          "type": "string",
+          "description": "The location of Dockerfile.",
+          "default": "Dockerfile on working directory"
+        },
+        "push": {
+          "type": "boolean",
+          "description": "Set to false, will build docker image, but not push to docker registry.",
+          "default": true
         }
       },
+      "required": [
+        "image"
+      ],
       "additionalProperties": false
     }
   }
