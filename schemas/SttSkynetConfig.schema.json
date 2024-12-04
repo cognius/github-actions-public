@@ -284,9 +284,9 @@
       "additionalProperties": false
     },
     "StSnDockerPublishV1": {
-      "$ref": "#/definitions/StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1,alias-253622725-72908-73004-253622725-0-215038<def-interface-1791154026-52-750-1791154026-0-888>>"
+      "$ref": "#/definitions/StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1,alias-895144443-72908-73004-895144443-0-217027<def-interface-1791154026-52-750-1791154026-0-888>>"
     },
-    "StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1,alias-253622725-72908-73004-253622725-0-215038<def-interface-1791154026-52-750-1791154026-0-888>>": {
+    "StSnBaseConfig<\"v1\",\"DockerPublish\",IStSnDockerPublishV1,alias-895144443-72908-73004-895144443-0-217027<def-interface-1791154026-52-750-1791154026-0-888>>": {
       "type": "object",
       "properties": {
         "base": {
