@@ -91,6 +91,9 @@
             },
             {
               "$ref": "#/definitions/ActionInfoFeatureCache"
+            },
+            {
+              "type": "null"
             }
           ]
         },
@@ -109,6 +112,9 @@
             },
             {
               "$ref": "#/definitions/ActionInfoFeatureCheckout"
+            },
+            {
+              "type": "null"
             }
           ]
         }
@@ -125,7 +131,8 @@
         "keyVersion": {
           "type": [
             "boolean",
-            "string"
+            "string",
+            "null"
           ]
         },
         "keySystem": {
