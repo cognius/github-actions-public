@@ -180,6 +180,14 @@
           "type": "string",
           "description": "default eks cluster name",
           "default": "undefined"
+        },
+        "jobs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "select jobs name to add git actions",
+          "default": "no jobs"
         }
       },
       "additionalProperties": false,
@@ -252,6 +260,14 @@
           "type": "string",
           "description": "Custom default role name.",
           "default": "undefined (no default role name)"
+        },
+        "jobs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "select jobs name to add git actions",
+          "default": "no jobs"
         }
       },
       "additionalProperties": false,
@@ -343,7 +359,8 @@
           "items": {
             "type": "string"
           },
-          "description": "select jobs name to add git actions"
+          "description": "select jobs name to add git actions",
+          "default": "add to all jobs"
         }
       },
       "additionalProperties": false,
@@ -376,6 +393,28 @@
           "type": "string",
           "description": "default eks cluster name",
           "default": "undefined"
+        },
+        "jobs": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "select jobs name to add git actions",
+              "default": "no jobs"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "select jobs name to add git actions",
+              "default": "add to all jobs"
+            }
+          ],
+          "description": "select jobs name to add git actions",
+          "default": "no jobs"
         },
         "withVersion": {
           "type": "boolean",
@@ -411,13 +450,6 @@
           "type": "number",
           "description": "how depth to checkout the code",
           "default": true
-        },
-        "jobs": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "select jobs name to add git actions"
         }
       },
       "additionalProperties": false
