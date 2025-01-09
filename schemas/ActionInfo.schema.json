@@ -2,6 +2,80 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
+    "kind": {
+      "type": "string",
+      "const": "ActionInfo"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/ActionInfoFeatureAWS"
+          },
+          {
+            "$ref": "#/definitions/ActionInfoFeatureCache"
+          },
+          {
+            "$ref": "#/definitions/ActionInfoFeatureCheckout"
+          },
+          {
+            "$ref": "#/definitions/ActionInfoFeatureCommandline"
+          },
+          {
+            "$ref": "#/definitions/ActionInfoFeatureFS"
+          },
+          {
+            "$ref": "#/definitions/ActionInfoFeatureGHApp"
+          },
+          {
+            "$ref": "#/definitions/ActionInfoFeatureGHToken"
+          },
+          {
+            "$ref": "#/definitions/ActionInfoFeatureSlack"
+          }
+        ]
+      }
+    },
+    "featuresMap": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<(ActionInfoFeatureAWS|ActionInfoFeatureCache|ActionInfoFeatureCheckout|ActionInfoFeatureCommandline|ActionInfoFeatureFS|ActionInfoFeatureGHApp|ActionInfoFeatureGHToken|ActionInfoFeatureSlack)>>"
+      },
+      "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+    },
+    "_features": {
+      "type": "array",
+      "minItems": 8,
+      "items": [
+        {
+          "$ref": "#/definitions/ActionInfoFeatureAWS"
+        },
+        {
+          "$ref": "#/definitions/ActionInfoFeatureCache"
+        },
+        {
+          "$ref": "#/definitions/ActionInfoFeatureCheckout"
+        },
+        {
+          "$ref": "#/definitions/ActionInfoFeatureCommandline"
+        },
+        {
+          "$ref": "#/definitions/ActionInfoFeatureFS"
+        },
+        {
+          "$ref": "#/definitions/ActionInfoFeatureGHApp"
+        },
+        {
+          "$ref": "#/definitions/ActionInfoFeatureGHToken"
+        },
+        {
+          "$ref": "#/definitions/ActionInfoFeatureSlack"
+        }
+      ],
+      "maxItems": 8,
+      "description": "This should always be empty, this if a workaround because I cannot get"
+    },
     "name": {
       "type": "string",
       "description": "The name of your action. GitHub displays the name in the Actions tab to help visually identify actions in each job.",
@@ -17,14 +91,10 @@
       "description": "The name of the action's author.",
       "minLength": 1
     },
-    "features": {
-      "$ref": "#/definitions/ActionInfoFeatures",
-      "description": "Pre-defined set of features supported by Actions context plugins."
-    },
     "inputs": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ActionInfoInputs"
+        "$ref": "#/definitions/ActionInfoInput"
       },
       "description": "List of Actions input field.",
       "uniqueItems": true
@@ -32,7 +102,7 @@
     "outputs": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ActionInfoOutputs"
+        "$ref": "#/definitions/ActionInfoOutput"
       },
       "description": "List of Actions outputs field.",
       "uniqueItems": true
@@ -43,97 +113,71 @@
     },
     "permissions": {
       "$ref": "#/definitions/ActionInfoPermissions",
-      "description": "The permissions needed to use actions"
+      "description": "The permissions needed to use actions."
     },
     "stepsPre": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ActionInfoSteps"
-      }
+        "$ref": "#/definitions/ActionInfoStep"
+      },
+      "description": "Additional steps before current actions. For documentation only."
     },
     "stepsPost": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ActionInfoSteps"
-      }
+        "$ref": "#/definitions/ActionInfoStep"
+      },
+      "description": "Additional steps after current actions. For documentation only."
     }
   },
   "required": [
-    "name",
-    "description"
+    "description",
+    "kind",
+    "name"
   ],
   "additionalProperties": false,
-  "description": "The json schema for _info.json file.\n\nThis is for generate actions information based on json file.",
   "definitions": {
-    "ActionInfoFeatures": {
+    "ActionInfoFeatureAWS": {
+      "$ref": "#/definitions/SchemaFeature<\"aws\">"
+    },
+    "SchemaFeature<\"aws\">": {
       "type": "object",
       "properties": {
-        "slack": {
+        "_key": {
+          "type": "string",
+          "const": "aws",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
           "type": "boolean",
-          "const": true
-        },
-        "ghApp": {
-          "type": "boolean",
-          "const": true
-        },
-        "ghToken": {
-          "type": "boolean",
-          "const": true
-        },
-        "fs": {
-          "type": "boolean",
-          "const": true
-        },
-        "cache": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ActionInfoFeatureCache"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "cli": {
-          "type": "boolean",
-          "const": true
-        },
-        "aws": {
-          "type": "boolean",
-          "const": true
-        },
-        "checkout": {
-          "anyOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/ActionInfoFeatureCheckout"
-            },
-            {
-              "type": "null"
-            }
-          ]
+          "description": "Set to false to disabled this features",
+          "default": true
         }
       },
+      "required": [
+        "_key"
+      ],
       "additionalProperties": false,
-      "description": "The ActionInfo object for features field."
+      "description": "The schema feature to transform schemas based on feature settings"
     },
     "ActionInfoFeatureCache": {
       "type": "object",
       "properties": {
+        "_key": {
+          "type": "string",
+          "const": "cache",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        },
         "disable": {
           "type": "boolean"
         },
         "keyVersion": {
-          "type": [
-            "boolean",
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "keySystem": {
           "type": "boolean"
@@ -157,18 +201,195 @@
           }
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "_key"
+      ]
     },
     "ActionInfoFeatureCheckout": {
       "type": "object",
       "properties": {
+        "_key": {
+          "type": "string",
+          "const": "checkout",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        },
+        "all": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "_key"
+      ]
+    },
+    "ActionInfoFeatureCommandline": {
+      "$ref": "#/definitions/SchemaFeature<\"commandline\">"
+    },
+    "SchemaFeature<\"commandline\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "commandline",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "ActionInfoFeatureFS": {
+      "$ref": "#/definitions/SchemaFeature<\"fs\">"
+    },
+    "SchemaFeature<\"fs\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "fs",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "ActionInfoFeatureGHApp": {
+      "$ref": "#/definitions/SchemaFeature<\"ghApp\">"
+    },
+    "SchemaFeature<\"ghApp\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "ghApp",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "ActionInfoFeatureGHToken": {
+      "$ref": "#/definitions/SchemaFeature<\"ghToken\">"
+    },
+    "SchemaFeature<\"ghToken\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "ghToken",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "ActionInfoFeatureSlack": {
+      "$ref": "#/definitions/SchemaFeature<\"slack\">"
+    },
+    "SchemaFeature<\"slack\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "slack",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "ConfigWithFlag<SchemaFeatureConfig<(ActionInfoFeatureAWS|ActionInfoFeatureCache|ActionInfoFeatureCheckout|ActionInfoFeatureCommandline|ActionInfoFeatureFS|ActionInfoFeatureGHApp|ActionInfoFeatureGHToken|ActionInfoFeatureSlack)>>": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeatureConfig<(ActionInfoFeatureAWS|ActionInfoFeatureCache|ActionInfoFeatureCheckout|ActionInfoFeatureCommandline|ActionInfoFeatureFS|ActionInfoFeatureGHApp|ActionInfoFeatureGHToken|ActionInfoFeatureSlack)>"
+        }
+      ]
+    },
+    "SchemaFeatureConfig<(ActionInfoFeatureAWS|ActionInfoFeatureCache|ActionInfoFeatureCheckout|ActionInfoFeatureCommandline|ActionInfoFeatureFS|ActionInfoFeatureGHApp|ActionInfoFeatureGHToken|ActionInfoFeatureSlack)>": {
+      "type": "object",
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "keyVersion": {
+          "type": "string"
+        },
+        "keySystem": {
+          "type": "boolean"
+        },
+        "keyWorkflow": {
+          "type": "boolean"
+        },
+        "keyBranch": {
+          "type": "boolean"
+        },
+        "keyFiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "all": {
           "type": "boolean"
         }
       },
       "additionalProperties": false
     },
-    "ActionInfoInputs": {
+    "ActionInfoInput": {
       "type": "object",
       "properties": {
         "key": {
@@ -236,7 +457,7 @@
       "additionalProperties": false,
       "description": "The ActionInfo object for inputs field."
     },
-    "ActionInfoOutputs": {
+    "ActionInfoOutput": {
       "type": "object",
       "properties": {
         "key": {
@@ -343,7 +564,7 @@
         "none"
       ]
     },
-    "ActionInfoSteps": {
+    "ActionInfoStep": {
       "type": "object",
       "properties": {
         "name": {

@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/StSnBase<string,string,unknown,unknown,string>",
+  "definitions": {
+    "StSnBase<string,string,unknown,unknown,string>": {
+      "type": "object",
+      "properties": {
+        "base": {},
+        "environments": {
+          "type": "object",
+          "properties": {
+            "": {},
+            "production": {},
+            "staging": {},
+            "testing": {},
+            "development": {}
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "not": {}
+          }
+        },
+        "featuresMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<never>>"
+          },
+          "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+        },
+        "_features": {
+          "$ref": "#/definitions/SchemaFeatureEmpty",
+          "description": "This should always be empty, this if a workaround because I cannot get"
+        },
+        "applications": {
+          "$ref": "#/definitions/StSnBaseApp<string,unknown,unknown>",
+          "description": "Optional application name to overrides default configuration"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "base",
+        "kind",
+        "version"
+      ],
+      "description": "The versionable, application and environment supported configuration schema. The StSn short for SmarterTravel Skynet configuration and will be used by ST Skynet bot.\n\nThe configuration priority as following: 1. Application environment configuration ($.applications.<a>.environments.<e>) 2. Application base configuration ($.applications.<a>.base) 3. Global environment configuration ($.environments.<e>) 3. Global base configuration ($.base)\n\nThe Global base configuration are only required configuration, everything else are optional."
+    },
+    "ConfigWithFlag<SchemaFeatureConfig<never>>": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeatureConfig<never>"
+        }
+      ]
+    },
+    "SchemaFeatureConfig<never>": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "SchemaFeatureEmpty": {
+      "type": "array",
+      "items": {
+        "not": {}
+      },
+      "description": "The empty schema features list (type helper)"
+    },
+    "StSnBaseApp<string,unknown,unknown>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "base": {},
+          "environments": {
+            "type": "object",
+            "properties": {
+              "": {},
+              "production": {},
+              "staging": {},
+              "testing": {},
+              "development": {}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

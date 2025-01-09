@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "Example",
+        "ActionInfo",
+        "TemplateMetadata",
+        "DockerPublish",
+        "HelmDeployment",
+        "KubeDeployment",
+        "WorkflowInfo"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SchemaFeatureAny"
+      }
+    },
+    "featuresMap": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<SchemaFeatureAny>>"
+      },
+      "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+    },
+    "_features": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SchemaFeatureAny"
+      },
+      "description": "This should always be empty, this if a workaround because I cannot get"
+    }
+  },
+  "required": [
+    "kind"
+  ],
+  "definitions": {
+    "SchemaFeatureAny": {
+      "$ref": "#/definitions/SchemaFeature<string>",
+      "description": "The any schema feature (type helper)"
+    },
+    "SchemaFeature<string>": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "ConfigWithFlag<SchemaFeatureConfig<SchemaFeatureAny>>": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeatureConfig<SchemaFeatureAny>"
+        }
+      ]
+    },
+    "SchemaFeatureConfig<SchemaFeatureAny>": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

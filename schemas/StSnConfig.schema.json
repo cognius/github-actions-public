@@ -1,0 +1,881 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/StSnDockerPublishSchema"
+    },
+    {
+      "$ref": "#/definitions/StSnHelmDeploymentSchema"
+    },
+    {
+      "$ref": "#/definitions/StSnKubeDeploymentSchema"
+    }
+  ],
+  "definitions": {
+    "StSnDockerPublishSchema": {
+      "$ref": "#/definitions/StSnDockerPublishV1"
+    },
+    "StSnDockerPublishV1": {
+      "$ref": "#/definitions/StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-750-262734462-0-854>"
+    },
+    "StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-750-262734462-0-854>": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "string",
+              "description": "The docker image name (do not included registry url).",
+              "default": "redis"
+            },
+            "registry": {
+              "type": "string",
+              "description": "The docker registry url."
+            },
+            "context": {
+              "type": "string",
+              "description": "The docker path context.",
+              "default": "working-directory"
+            },
+            "dockerfile": {
+              "type": "string",
+              "description": "The location of Dockerfile.",
+              "default": "Dockerfile on working directory"
+            },
+            "push": {
+              "type": "boolean",
+              "description": "Set to false, will build docker image, but not push to docker registry.",
+              "default": true
+            }
+          },
+          "required": [
+            "image"
+          ],
+          "additionalProperties": false
+        },
+        "environments": {
+          "type": "object",
+          "properties": {
+            "": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            },
+            "production": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            },
+            "staging": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            },
+            "testing": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            },
+            "development": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "DockerPublish"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "not": {}
+          }
+        },
+        "featuresMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<never>>"
+          },
+          "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+        },
+        "_features": {
+          "$ref": "#/definitions/SchemaFeatureEmpty",
+          "description": "This should always be empty, this if a workaround because I cannot get"
+        },
+        "applications": {
+          "$ref": "#/definitions/StSnBaseApp<string,interface-262734462-54-750-262734462-0-854,interface-262734462-54-750-262734462-0-854>",
+          "description": "Optional application name to overrides default configuration"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "base",
+        "kind",
+        "version"
+      ],
+      "description": "The versionable, application and environment supported configuration schema. The StSn short for SmarterTravel Skynet configuration and will be used by ST Skynet bot.\n\nThe configuration priority as following: 1. Application environment configuration ($.applications.<a>.environments.<e>) 2. Application base configuration ($.applications.<a>.base) 3. Global environment configuration ($.environments.<e>) 3. Global base configuration ($.base)\n\nThe Global base configuration are only required configuration, everything else are optional."
+    },
+    "ConfigWithFlag<SchemaFeatureConfig<never>>": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeatureConfig<never>"
+        }
+      ]
+    },
+    "SchemaFeatureConfig<never>": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "SchemaFeatureEmpty": {
+      "type": "array",
+      "items": {
+        "not": {}
+      },
+      "description": "The empty schema features list (type helper)"
+    },
+    "StSnBaseApp<string,interface-262734462-54-750-262734462-0-854,interface-262734462-54-750-262734462-0-854>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "base": {
+            "type": "object",
+            "properties": {
+              "image": {
+                "type": "string",
+                "description": "The docker image name (do not included registry url).",
+                "default": "redis"
+              },
+              "registry": {
+                "type": "string",
+                "description": "The docker registry url."
+              },
+              "context": {
+                "type": "string",
+                "description": "The docker path context.",
+                "default": "working-directory"
+              },
+              "dockerfile": {
+                "type": "string",
+                "description": "The location of Dockerfile.",
+                "default": "Dockerfile on working directory"
+              },
+              "push": {
+                "type": "boolean",
+                "description": "Set to false, will build docker image, but not push to docker registry.",
+                "default": true
+              }
+            },
+            "required": [
+              "image"
+            ],
+            "additionalProperties": false
+          },
+          "environments": {
+            "type": "object",
+            "properties": {
+              "": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              },
+              "production": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              },
+              "staging": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              },
+              "testing": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              },
+              "development": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "StSnHelmDeploymentSchema": {
+      "$ref": "#/definitions/StSnHelmDeploymentV1"
+    },
+    "StSnHelmDeploymentV1": {
+      "$ref": "#/definitions/StSnBase<\"HelmDeployment\",\"v1\",StSnHelmDeploymentV1ConfigBase,StSnHelmDeploymentV1ConfigEnv>"
+    },
+    "StSnBase<\"HelmDeployment\",\"v1\",StSnHelmDeploymentV1ConfigBase,StSnHelmDeploymentV1ConfigEnv>": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/definitions/StSnHelmDeploymentV1ConfigBase"
+        },
+        "environments": {
+          "type": "object",
+          "properties": {
+            "": {
+              "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+            },
+            "production": {
+              "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+            },
+            "staging": {
+              "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+            },
+            "testing": {
+              "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+            },
+            "development": {
+              "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+            }
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "HelmDeployment"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "not": {}
+          }
+        },
+        "featuresMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<never>>"
+          },
+          "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+        },
+        "_features": {
+          "$ref": "#/definitions/SchemaFeatureEmpty",
+          "description": "This should always be empty, this if a workaround because I cannot get"
+        },
+        "applications": {
+          "$ref": "#/definitions/StSnBaseApp<string,StSnHelmDeploymentV1ConfigBase,StSnHelmDeploymentV1ConfigEnv>",
+          "description": "Optional application name to overrides default configuration"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "base",
+        "kind",
+        "version"
+      ],
+      "description": "The versionable, application and environment supported configuration schema. The StSn short for SmarterTravel Skynet configuration and will be used by ST Skynet bot.\n\nThe configuration priority as following: 1. Application environment configuration ($.applications.<a>.environments.<e>) 2. Application base configuration ($.applications.<a>.base) 3. Global environment configuration ($.environments.<e>) 3. Global base configuration ($.base)\n\nThe Global base configuration are only required configuration, everything else are optional."
+    },
+    "StSnHelmDeploymentV1ConfigBase": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace which helm will be deploy on"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of deployment (release name)."
+        },
+        "chart": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/ChartType",
+              "description": "The chart type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The chart name to install. This name will append to location for oci and local type, for http, this will be name of application to install from helm-chart index.yaml file."
+            },
+            "location": {
+              "type": "string",
+              "description": "Chart location. Depends on type of chart. Location can be either relative path to chart directory (local), url to chart index.yaml file (http), or url to container registry (oci)."
+            },
+            "version": {
+              "type": "string",
+              "description": "Optional chart version.",
+              "default": "latest"
+            }
+          },
+          "required": [
+            "type",
+            "name",
+            "location"
+          ],
+          "additionalProperties": false
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "List of values.yaml file path.",
+          "default": "current-directory"
+        },
+        "overrides": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Overrides values.yaml file using --set options. The values of this field will be parsed by handlebars template."
+        },
+        "timeout": {
+          "type": "string",
+          "description": "Helm install timeout",
+          "default": "5m"
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Helm will force resource updates through a replacement strategy.",
+          "default": false
+        },
+        "rollback": {
+          "type": "boolean",
+          "description": "Automatically rollback when application cannot start within timeout.",
+          "default": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ChartType": {
+      "type": "string",
+      "enum": [
+        "oci",
+        "http",
+        "local"
+      ]
+    },
+    "StSnHelmDeploymentV1ConfigEnv": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "List of values.yaml file path.",
+          "default": "current-directory"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace which helm will be deploy on"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of deployment (release name)."
+        },
+        "chart": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/ChartType",
+              "description": "The chart type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The chart name to install. This name will append to location for oci and local type, for http, this will be name of application to install from helm-chart index.yaml file."
+            },
+            "location": {
+              "type": "string",
+              "description": "Chart location. Depends on type of chart. Location can be either relative path to chart directory (local), url to chart index.yaml file (http), or url to container registry (oci)."
+            },
+            "version": {
+              "type": "string",
+              "description": "Optional chart version.",
+              "default": "latest"
+            }
+          },
+          "required": [
+            "type",
+            "name",
+            "location"
+          ],
+          "additionalProperties": false
+        },
+        "overrides": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Overrides values.yaml file using --set options. The values of this field will be parsed by handlebars template."
+        },
+        "timeout": {
+          "type": "string",
+          "description": "Helm install timeout",
+          "default": "5m"
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Helm will force resource updates through a replacement strategy.",
+          "default": false
+        },
+        "rollback": {
+          "type": "boolean",
+          "description": "Automatically rollback when application cannot start within timeout.",
+          "default": true
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "StSnBaseApp<string,StSnHelmDeploymentV1ConfigBase,StSnHelmDeploymentV1ConfigEnv>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "base": {
+            "$ref": "#/definitions/StSnHelmDeploymentV1ConfigBase"
+          },
+          "environments": {
+            "type": "object",
+            "properties": {
+              "": {
+                "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+              },
+              "production": {
+                "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+              },
+              "staging": {
+                "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+              },
+              "testing": {
+                "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+              },
+              "development": {
+                "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "StSnKubeDeploymentSchema": {
+      "$ref": "#/definitions/StSnKubeDeploymentV1"
+    },
+    "StSnKubeDeploymentV1": {
+      "$ref": "#/definitions/StSnBase<\"KubeDeployment\",\"v1\",StSnKubeDeploymentV1Config>"
+    },
+    "StSnBase<\"KubeDeployment\",\"v1\",StSnKubeDeploymentV1Config>": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+        },
+        "environments": {
+          "type": "object",
+          "properties": {
+            "": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "production": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "staging": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "testing": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "development": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            }
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "KubeDeployment"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "not": {}
+          }
+        },
+        "featuresMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<never>>"
+          },
+          "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+        },
+        "_features": {
+          "$ref": "#/definitions/SchemaFeatureEmpty",
+          "description": "This should always be empty, this if a workaround because I cannot get"
+        },
+        "applications": {
+          "$ref": "#/definitions/StSnBaseApp<string,StSnKubeDeploymentV1Config,StSnKubeDeploymentV1Config>",
+          "description": "Optional application name to overrides default configuration"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "base",
+        "kind",
+        "version"
+      ],
+      "description": "The versionable, application and environment supported configuration schema. The StSn short for SmarterTravel Skynet configuration and will be used by ST Skynet bot.\n\nThe configuration priority as following: 1. Application environment configuration ($.applications.<a>.environments.<e>) 2. Application base configuration ($.applications.<a>.base) 3. Global environment configuration ($.environments.<e>) 3. Global base configuration ($.base)\n\nThe Global base configuration are only required configuration, everything else are optional."
+    },
+    "StSnKubeDeploymentV1Config": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "namespace"
+      ],
+      "additionalProperties": false
+    },
+    "StSnBaseApp<string,StSnKubeDeploymentV1Config,StSnKubeDeploymentV1Config>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "base": {
+            "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+          },
+          "environments": {
+            "type": "object",
+            "properties": {
+              "": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "production": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "staging": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "testing": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "development": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

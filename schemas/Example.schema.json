@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "Example"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/SchemaFeature<\"a\">"
+          },
+          {
+            "$ref": "#/definitions/SchemaFeature<\"b\">"
+          }
+        ]
+      }
+    },
+    "featuresMap": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<(alias-2069939574-74-118-2069939574-0-371|alias-2069939574-118-161-2069939574-0-371)>>"
+      },
+      "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+    },
+    "_features": {
+      "$ref": "#/definitions/ExampleFeatures",
+      "description": "This should always be empty, this if a workaround because I cannot get"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "kind",
+    "name"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "SchemaFeature<\"a\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "a",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "SchemaFeature<\"b\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "b",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "ConfigWithFlag<SchemaFeatureConfig<(alias-2069939574-74-118-2069939574-0-371|alias-2069939574-118-161-2069939574-0-371)>>": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeatureConfig<(alias-2069939574-74-118-2069939574-0-371|alias-2069939574-118-161-2069939574-0-371)>"
+        }
+      ]
+    },
+    "SchemaFeatureConfig<(alias-2069939574-74-118-2069939574-0-371|alias-2069939574-118-161-2069939574-0-371)>": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ExampleFeatures": {
+      "type": "array",
+      "minItems": 2,
+      "items": [
+        {
+          "$ref": "#/definitions/SchemaFeature<\"a\">"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeature<\"b\">"
+        }
+      ],
+      "maxItems": 2
+    }
+  }
+}

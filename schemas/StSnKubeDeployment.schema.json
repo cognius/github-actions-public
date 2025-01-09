@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/StSnKubeDeploymentV1",
+  "definitions": {
+    "StSnKubeDeploymentV1": {
+      "$ref": "#/definitions/StSnBase<\"KubeDeployment\",\"v1\",StSnKubeDeploymentV1Config>"
+    },
+    "StSnBase<\"KubeDeployment\",\"v1\",StSnKubeDeploymentV1Config>": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+        },
+        "environments": {
+          "type": "object",
+          "properties": {
+            "": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "production": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "staging": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "testing": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "development": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            }
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "KubeDeployment"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "not": {}
+          }
+        },
+        "featuresMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<never>>"
+          },
+          "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+        },
+        "_features": {
+          "$ref": "#/definitions/SchemaFeatureEmpty",
+          "description": "This should always be empty, this if a workaround because I cannot get"
+        },
+        "applications": {
+          "$ref": "#/definitions/StSnBaseApp<string,StSnKubeDeploymentV1Config,StSnKubeDeploymentV1Config>",
+          "description": "Optional application name to overrides default configuration"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "base",
+        "kind",
+        "version"
+      ],
+      "description": "The versionable, application and environment supported configuration schema. The StSn short for SmarterTravel Skynet configuration and will be used by ST Skynet bot.\n\nThe configuration priority as following: 1. Application environment configuration ($.applications.<a>.environments.<e>) 2. Application base configuration ($.applications.<a>.base) 3. Global environment configuration ($.environments.<e>) 3. Global base configuration ($.base)\n\nThe Global base configuration are only required configuration, everything else are optional."
+    },
+    "StSnKubeDeploymentV1Config": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "namespace"
+      ],
+      "additionalProperties": false
+    },
+    "ConfigWithFlag<SchemaFeatureConfig<never>>": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeatureConfig<never>"
+        }
+      ]
+    },
+    "SchemaFeatureConfig<never>": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "SchemaFeatureEmpty": {
+      "type": "array",
+      "items": {
+        "not": {}
+      },
+      "description": "The empty schema features list (type helper)"
+    },
+    "StSnBaseApp<string,StSnKubeDeploymentV1Config,StSnKubeDeploymentV1Config>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "base": {
+            "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+          },
+          "environments": {
+            "type": "object",
+            "properties": {
+              "": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "production": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "staging": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "testing": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "development": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

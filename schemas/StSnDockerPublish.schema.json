@@ -1,0 +1,488 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/StSnDockerPublishV1",
+  "definitions": {
+    "StSnDockerPublishV1": {
+      "$ref": "#/definitions/StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-750-262734462-0-854>"
+    },
+    "StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-750-262734462-0-854>": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "string",
+              "description": "The docker image name (do not included registry url).",
+              "default": "redis"
+            },
+            "registry": {
+              "type": "string",
+              "description": "The docker registry url."
+            },
+            "context": {
+              "type": "string",
+              "description": "The docker path context.",
+              "default": "working-directory"
+            },
+            "dockerfile": {
+              "type": "string",
+              "description": "The location of Dockerfile.",
+              "default": "Dockerfile on working directory"
+            },
+            "push": {
+              "type": "boolean",
+              "description": "Set to false, will build docker image, but not push to docker registry.",
+              "default": true
+            }
+          },
+          "required": [
+            "image"
+          ],
+          "additionalProperties": false
+        },
+        "environments": {
+          "type": "object",
+          "properties": {
+            "": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            },
+            "production": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            },
+            "staging": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            },
+            "testing": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            },
+            "development": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context.",
+                  "default": "working-directory"
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile.",
+                  "default": "Dockerfile on working directory"
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                }
+              },
+              "required": [
+                "image"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "string",
+          "const": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "const": "DockerPublish"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "not": {}
+          }
+        },
+        "featuresMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<never>>"
+          },
+          "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+        },
+        "_features": {
+          "$ref": "#/definitions/SchemaFeatureEmpty",
+          "description": "This should always be empty, this if a workaround because I cannot get"
+        },
+        "applications": {
+          "$ref": "#/definitions/StSnBaseApp<string,interface-262734462-54-750-262734462-0-854,interface-262734462-54-750-262734462-0-854>",
+          "description": "Optional application name to overrides default configuration"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "base",
+        "kind",
+        "version"
+      ],
+      "description": "The versionable, application and environment supported configuration schema. The StSn short for SmarterTravel Skynet configuration and will be used by ST Skynet bot.\n\nThe configuration priority as following: 1. Application environment configuration ($.applications.<a>.environments.<e>) 2. Application base configuration ($.applications.<a>.base) 3. Global environment configuration ($.environments.<e>) 3. Global base configuration ($.base)\n\nThe Global base configuration are only required configuration, everything else are optional."
+    },
+    "ConfigWithFlag<SchemaFeatureConfig<never>>": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeatureConfig<never>"
+        }
+      ]
+    },
+    "SchemaFeatureConfig<never>": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "SchemaFeatureEmpty": {
+      "type": "array",
+      "items": {
+        "not": {}
+      },
+      "description": "The empty schema features list (type helper)"
+    },
+    "StSnBaseApp<string,interface-262734462-54-750-262734462-0-854,interface-262734462-54-750-262734462-0-854>": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "base": {
+            "type": "object",
+            "properties": {
+              "image": {
+                "type": "string",
+                "description": "The docker image name (do not included registry url).",
+                "default": "redis"
+              },
+              "registry": {
+                "type": "string",
+                "description": "The docker registry url."
+              },
+              "context": {
+                "type": "string",
+                "description": "The docker path context.",
+                "default": "working-directory"
+              },
+              "dockerfile": {
+                "type": "string",
+                "description": "The location of Dockerfile.",
+                "default": "Dockerfile on working directory"
+              },
+              "push": {
+                "type": "boolean",
+                "description": "Set to false, will build docker image, but not push to docker registry.",
+                "default": true
+              }
+            },
+            "required": [
+              "image"
+            ],
+            "additionalProperties": false
+          },
+          "environments": {
+            "type": "object",
+            "properties": {
+              "": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              },
+              "production": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              },
+              "staging": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              },
+              "testing": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              },
+              "development": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context.",
+                    "default": "working-directory"
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile.",
+                    "default": "Dockerfile on working directory"
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

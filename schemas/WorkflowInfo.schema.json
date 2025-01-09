@@ -1,0 +1,886 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "WorkflowInfo"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/WorkflowInfoFeatureCreateRelease"
+          },
+          {
+            "$ref": "#/definitions/WorkflowInfoFeatureEKS"
+          },
+          {
+            "$ref": "#/definitions/WorkflowInfoFeatureGetInfo"
+          },
+          {
+            "$ref": "#/definitions/WorkflowInfoFeatureNotifyAction"
+          },
+          {
+            "$ref": "#/definitions/WorkflowInfoFeatureAWS"
+          },
+          {
+            "$ref": "#/definitions/WorkflowInfoFeatureCommandline"
+          },
+          {
+            "$ref": "#/definitions/WorkflowInfoFeatureFS"
+          },
+          {
+            "$ref": "#/definitions/WorkflowInfoFeatureGit"
+          }
+        ]
+      }
+    },
+    "featuresMap": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<(WorkflowInfoFeatureCreateRelease|WorkflowInfoFeatureEKS|WorkflowInfoFeatureGetInfo|WorkflowInfoFeatureNotifyAction|WorkflowInfoFeatureAWS|WorkflowInfoFeatureCommandline|WorkflowInfoFeatureFS|WorkflowInfoFeatureGit)>>"
+      },
+      "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
+    },
+    "_features": {
+      "type": "array",
+      "minItems": 8,
+      "items": [
+        {
+          "$ref": "#/definitions/WorkflowInfoFeatureCreateRelease"
+        },
+        {
+          "$ref": "#/definitions/WorkflowInfoFeatureEKS"
+        },
+        {
+          "$ref": "#/definitions/WorkflowInfoFeatureGetInfo"
+        },
+        {
+          "$ref": "#/definitions/WorkflowInfoFeatureNotifyAction"
+        },
+        {
+          "$ref": "#/definitions/WorkflowInfoFeatureAWS"
+        },
+        {
+          "$ref": "#/definitions/WorkflowInfoFeatureCommandline"
+        },
+        {
+          "$ref": "#/definitions/WorkflowInfoFeatureFS"
+        },
+        {
+          "$ref": "#/definitions/WorkflowInfoFeatureGit"
+        }
+      ],
+      "maxItems": 8,
+      "description": "This should always be empty, this if a workaround because I cannot get"
+    },
+    "title": {
+      "type": "string",
+      "description": "A workflow name for documentation.",
+      "pattern": "^[A-Za-z \\-$]+$"
+    },
+    "summary": {
+      "type": "string",
+      "description": "A workflow summary for documentation.",
+      "pattern": "[^.]$"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ],
+      "description": "A workflow description for documentation."
+    },
+    "permissions": {
+      "$ref": "#/definitions/WorkflowInfoPermissions",
+      "description": "The permissions needed to use workflow."
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/WorkflowInfoInput"
+      },
+      "description": "Workflow input list."
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/WorkflowInfoOutput"
+      },
+      "description": "Workflow output list."
+    },
+    "secrets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/WorkflowInfoSecret"
+      },
+      "description": "Workflow secret list."
+    },
+    "jobs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/WorkflowInfoJobDefinition"
+      },
+      "minItems": 1,
+      "description": "Jobs definitions."
+    }
+  },
+  "required": [
+    "jobs",
+    "kind"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "WorkflowInfoFeatureCreateRelease": {
+      "$ref": "#/definitions/SchemaFeature<\"createRelease\">"
+    },
+    "SchemaFeature<\"createRelease\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "createRelease",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "WorkflowInfoFeatureEKS": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "eks",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "default eks cluster name",
+          "default": "undefined"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "_key"
+      ]
+    },
+    "WorkflowInfoFeatureGetInfo": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "getInfo",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        },
+        "withVersion": {
+          "type": "boolean",
+          "description": "Add app-version input as well.",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "_key"
+      ]
+    },
+    "WorkflowInfoFeatureNotifyAction": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "notifyAction",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        },
+        "slackChannel": {
+          "type": "string",
+          "description": "default slack channel name (e.g. general, deploys-all).",
+          "default": "empty"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "_key"
+      ]
+    },
+    "WorkflowInfoFeatureAWS": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "aws",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        },
+        "roleName": {
+          "type": "string",
+          "description": "Custom default role name.",
+          "default": "undefined (no default role name)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "_key"
+      ]
+    },
+    "WorkflowInfoFeatureCommandline": {
+      "$ref": "#/definitions/SchemaFeature<\"commandline\">"
+    },
+    "SchemaFeature<\"commandline\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "commandline",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "WorkflowInfoFeatureFS": {
+      "$ref": "#/definitions/SchemaFeature<\"fs\">"
+    },
+    "SchemaFeature<\"fs\">": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "fs",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        }
+      },
+      "required": [
+        "_key"
+      ],
+      "additionalProperties": false,
+      "description": "The schema feature to transform schemas based on feature settings"
+    },
+    "WorkflowInfoFeatureGit": {
+      "type": "object",
+      "properties": {
+        "_key": {
+          "type": "string",
+          "const": "git",
+          "description": "Feature key to identify the feature parser to use"
+        },
+        "_enabled": {
+          "type": "boolean",
+          "description": "Set to false to disabled this features",
+          "default": true
+        },
+        "type": {
+          "$ref": "#/definitions/GitType",
+          "description": "type of the git to set up",
+          "default": "GH_ACTION"
+        },
+        "username": {
+          "type": "string",
+          "description": "git config username",
+          "default": "depends on type field"
+        },
+        "email": {
+          "type": "string",
+          "description": "git config email",
+          "default": "depends on type field"
+        },
+        "checkoutDepth": {
+          "type": "number",
+          "description": "how depth to checkout the code",
+          "default": true
+        },
+        "jobs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "select jobs name to add git actions"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "_key"
+      ]
+    },
+    "GitType": {
+      "type": "string",
+      "enum": [
+        "GH_ACTION",
+        "GH_BOT",
+        "GH_BOT_V2"
+      ]
+    },
+    "ConfigWithFlag<SchemaFeatureConfig<(WorkflowInfoFeatureCreateRelease|WorkflowInfoFeatureEKS|WorkflowInfoFeatureGetInfo|WorkflowInfoFeatureNotifyAction|WorkflowInfoFeatureAWS|WorkflowInfoFeatureCommandline|WorkflowInfoFeatureFS|WorkflowInfoFeatureGit)>>": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/SchemaFeatureConfig<(WorkflowInfoFeatureCreateRelease|WorkflowInfoFeatureEKS|WorkflowInfoFeatureGetInfo|WorkflowInfoFeatureNotifyAction|WorkflowInfoFeatureAWS|WorkflowInfoFeatureCommandline|WorkflowInfoFeatureFS|WorkflowInfoFeatureGit)>"
+        }
+      ]
+    },
+    "SchemaFeatureConfig<(WorkflowInfoFeatureCreateRelease|WorkflowInfoFeatureEKS|WorkflowInfoFeatureGetInfo|WorkflowInfoFeatureNotifyAction|WorkflowInfoFeatureAWS|WorkflowInfoFeatureCommandline|WorkflowInfoFeatureFS|WorkflowInfoFeatureGit)>": {
+      "type": "object",
+      "properties": {
+        "clusterName": {
+          "type": "string",
+          "description": "default eks cluster name",
+          "default": "undefined"
+        },
+        "withVersion": {
+          "type": "boolean",
+          "description": "Add app-version input as well.",
+          "default": false
+        },
+        "slackChannel": {
+          "type": "string",
+          "description": "default slack channel name (e.g. general, deploys-all).",
+          "default": "empty"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "Custom default role name.",
+          "default": "undefined (no default role name)"
+        },
+        "type": {
+          "$ref": "#/definitions/GitType",
+          "description": "type of the git to set up",
+          "default": "GH_ACTION"
+        },
+        "username": {
+          "type": "string",
+          "description": "git config username",
+          "default": "depends on type field"
+        },
+        "email": {
+          "type": "string",
+          "description": "git config email",
+          "default": "depends on type field"
+        },
+        "checkoutDepth": {
+          "type": "number",
+          "description": "how depth to checkout the code",
+          "default": true
+        },
+        "jobs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "select jobs name to add git actions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkflowInfoPermissions": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "read-all"
+        },
+        {
+          "type": "string",
+          "const": "write-all"
+        },
+        {
+          "$ref": "#/definitions/WorkflowInfoPermissionsObject"
+        }
+      ]
+    },
+    "WorkflowInfoPermissionsObject": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "attestations": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "checks": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "contents": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "deployments": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "discussions": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "id-token": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "issues": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "packages": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "pages": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "pull-requests": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "repository-projects": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "security-events": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        },
+        "statuses": {
+          "$ref": "#/definitions/PermissionsAccessLevel"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PermissionsAccessLevel": {
+      "type": "string",
+      "enum": [
+        "read",
+        "write",
+        "none"
+      ]
+    },
+    "WorkflowInfoInput": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "A string identifier to associate with the input",
+          "pattern": "^[a-z][a-z0-9-]+$"
+        },
+        "title": {
+          "type": "string",
+          "description": "A string title for documentation.",
+          "pattern": "^[A-Za-z \\-$]+$"
+        },
+        "type": {
+          "$ref": "#/definitions/WorkflowInfoInputType",
+          "description": "A string specifying the data type of the input."
+        },
+        "summary": {
+          "type": "string",
+          "description": "A string summary of the input parameter.",
+          "pattern": "[^.]$"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "A longer description of the input parameter."
+        },
+        "default": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "A string representing the default value. Without this value, the input will mark as required"
+        },
+        "example": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "A example value for setting this input value (e.g. ${{ secrets.EXAMPLE }})"
+        }
+      },
+      "required": [
+        "key",
+        "type",
+        "summary"
+      ],
+      "additionalProperties": false,
+      "description": "Specify inputs that are passed to the called workflow from the caller workflow."
+    },
+    "WorkflowInfoInputType": {
+      "type": "string",
+      "enum": [
+        "string",
+        "number",
+        "boolean"
+      ]
+    },
+    "WorkflowInfoOutput": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "A string identifier to associate with the output",
+          "pattern": "^[a-z][a-z0-9-]+$"
+        },
+        "title": {
+          "type": "string",
+          "description": "A string title for documentation.",
+          "pattern": "^[A-Za-z \\-$]+$"
+        },
+        "summary": {
+          "type": "string",
+          "description": "A string summary of the output parameter.",
+          "pattern": "[^.]$"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "A longer description of the output parameter."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value must be set to the value of an output from a job."
+        }
+      },
+      "required": [
+        "key",
+        "summary",
+        "value"
+      ],
+      "additionalProperties": false,
+      "description": "A outputs for a called workflow."
+    },
+    "WorkflowInfoSecret": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "A string identifier to associate with the secret",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "title": {
+          "type": "string",
+          "description": "A string title for documentation.",
+          "pattern": "^[A-Za-z \\-$]+$"
+        },
+        "summary": {
+          "type": "string",
+          "description": "A string summary of the secret parameter.",
+          "pattern": "[^.]$"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "A longer description of the secret parameter."
+        },
+        "required": {
+          "type": "boolean",
+          "const": false,
+          "description": "By default all defined secret are required, set to false for optional secrets."
+        }
+      },
+      "required": [
+        "key",
+        "summary"
+      ],
+      "additionalProperties": false,
+      "description": "A secrets that can be used in the called workflow."
+    },
+    "WorkflowInfoJobDefinition": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "A string identifier to associate with the job",
+          "pattern": "^[a-z][a-z0-9-]+$"
+        },
+        "runsOn": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/JobDefinitionRunOn"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JobDefinitionRunOn"
+              }
+            }
+          ],
+          "description": "Define the type of machine to run the job on",
+          "default": "ubuntu-latest"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StepDefinition"
+          },
+          "minItems": 1,
+          "description": "Steps can run commands, run setup tasks, or run an action in your repository."
+        },
+        "permissions": {
+          "$ref": "#/definitions/WorkflowInfoPermissions",
+          "description": "The permissions needed to run this job."
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "Sets variables for all steps in job to use in the runner environment."
+        },
+        "outputs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Create a map of outputs for a job. Outputs are Unicode strings, and can be a maximum of 1 MB. The total of all outputs in a workflow run can be a maximum of 50 MB."
+        },
+        "needs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "identify any jobs that must complete successfully before this job will run."
+        },
+        "strategy": {
+          "$ref": "#/definitions/WorkflowInfoJobStrategy",
+          "description": "A matrix strategy lets you use variables in a single job definition to automatically create multiple job runs that are based on the combinations of the variables."
+        },
+        "if": {
+          "type": "string",
+          "description": "The if conditional to prevent a job from running unless a condition is met."
+        }
+      },
+      "required": [
+        "key",
+        "steps"
+      ],
+      "additionalProperties": false
+    },
+    "JobDefinitionRunOn": {
+      "type": "string",
+      "const": "ubuntu-latest"
+    },
+    "StepDefinition": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/StepDefinitionUses"
+        },
+        {
+          "$ref": "#/definitions/StepDefinitionRuns"
+        }
+      ],
+      "description": "Steps can run commands, run setup tasks, or run an action in your repository, a public repository, or an action published in a Docker registry."
+    },
+    "StepDefinitionUses": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the step."
+        },
+        "if": {
+          "type": "string",
+          "description": "The if conditional to prevent a step from running unless a condition is met."
+        },
+        "name": {
+          "type": "string",
+          "description": "A name for your step to display on GitHub"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "Sets variables for steps to use in the runner environment."
+        },
+        "working-directory": {
+          "type": "string",
+          "description": "Specify the working directory of where to run the command."
+        },
+        "uses": {
+          "type": "string",
+          "description": "To selects an action to run as part of a step in your job. This is a special fields it will parse to template with {{ branch }} and {{ env }} variables for internal actions."
+        },
+        "with": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "A map of the input parameters defined by the action."
+        }
+      },
+      "required": [
+        "name",
+        "uses"
+      ],
+      "additionalProperties": false
+    },
+    "StepDefinitionRuns": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the step."
+        },
+        "if": {
+          "type": "string",
+          "description": "The if conditional to prevent a step from running unless a condition is met."
+        },
+        "name": {
+          "type": "string",
+          "description": "A name for your step to display on GitHub"
+        },
+        "env": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "Sets variables for steps to use in the runner environment."
+        },
+        "working-directory": {
+          "type": "string",
+          "description": "Specify the working directory of where to run the command."
+        },
+        "run": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "Runs command-line programs that do not exceed 21,000 characters using the operating system's shell."
+        }
+      },
+      "required": [
+        "name",
+        "run"
+      ],
+      "additionalProperties": false
+    },
+    "WorkflowInfoJobStrategy": {
+      "type": "object",
+      "properties": {
+        "fail-fast": {
+          "type": "boolean",
+          "description": "If this is set to true, GitHub will cancel all in-progress and queued jobs in the matrix if any job in the matrix fails.",
+          "default": true
+        },
+        "max-parallel": {
+          "type": "number",
+          "description": "To set the maximum number of jobs that can run simultaneously when using a matrix job",
+          "default": "runner availability"
+        },
+        "matrix": {
+          "$ref": "#/definitions/JobStrategyMatrix",
+          "description": "Define a matrix of different job configurations."
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobStrategyMatrix": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array"
+      },
+      "properties": {
+        "include": {
+          "$ref": "#/definitions/JobStrategyMatrixRule"
+        },
+        "exclude": {
+          "$ref": "#/definitions/JobStrategyMatrixRule"
+        }
+      }
+    },
+    "JobStrategyMatrixRule": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
