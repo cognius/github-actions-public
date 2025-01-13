@@ -221,6 +221,9 @@
         },
         "all": {
           "type": "boolean"
+        },
+        "ref": {
+          "type": "string"
         }
       },
       "additionalProperties": false,
@@ -385,6 +388,9 @@
         },
         "all": {
           "type": "boolean"
+        },
+        "ref": {
+          "type": "string"
         }
       },
       "additionalProperties": false
