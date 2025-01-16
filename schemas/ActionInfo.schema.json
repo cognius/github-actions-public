@@ -84,7 +84,7 @@
     "description": {
       "type": "string",
       "description": "A short description of the action.",
-      "pattern": "^[A-Za-z .\\-_()]+[^.]$"
+      "pattern": "^[A-Za-z ,.\\-_()]+[^.]$"
     },
     "author": {
       "type": "string",
