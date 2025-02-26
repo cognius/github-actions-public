@@ -81,10 +81,24 @@
       "description": "The name of your action. GitHub displays the name in the Actions tab to help visually identify actions in each job.",
       "pattern": "^[A-Za-z .\\-_()]+$"
     },
-    "description": {
+    "summary": {
       "type": "string",
-      "description": "A short description of the action.",
-      "pattern": "^[A-Za-z ,.\\-_()]+[^.]$"
+      "description": "A string summary of the input parameter.",
+      "pattern": "[^.]$"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ],
+      "description": "A longer description of the input parameter."
     },
     "author": {
       "type": "string",
@@ -131,9 +145,9 @@
     }
   },
   "required": [
-    "description",
     "kind",
-    "name"
+    "name",
+    "summary"
   ],
   "additionalProperties": false,
   "definitions": {
