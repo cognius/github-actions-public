@@ -123,7 +123,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Overrides values.yaml file using --set options. The values of this field will be parsed by handlebars template."
+          "description": "Overrides values.yaml file using --set options. The values of this field will be parsed by handlebars template.\n\nBelow is the template variables: app: {   name: data.app,   environment: data.environment,   version: data.version,   tag: data.tag,   digest: data.digest, }"
         },
         "timeout": {
           "type": "string",
@@ -205,7 +205,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Overrides values.yaml file using --set options. The values of this field will be parsed by handlebars template."
+          "description": "Overrides values.yaml file using --set options. The values of this field will be parsed by handlebars template.\n\nBelow is the template variables: app: {   name: data.app,   environment: data.environment,   version: data.version,   tag: data.tag,   digest: data.digest, }"
         },
         "timeout": {
           "type": "string",
