@@ -102,7 +102,7 @@
     },
     "permissions": {
       "$ref": "#/definitions/WorkflowInfoPermissions",
-      "description": "The permissions needed to use workflow."
+      "description": "The permissions needed to use workflow for documentation. This should list all permissions in jobs required to run current workflow."
     },
     "inputs": {
       "type": "array",
