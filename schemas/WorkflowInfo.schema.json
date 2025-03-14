@@ -209,8 +209,12 @@
           "default": true
         },
         "withVersion": {
-          "type": "boolean",
-          "description": "Add app-version input as well.",
+          "type": "string",
+          "enum": [
+            "required",
+            "optional"
+          ],
+          "description": "Add required or optional app-version input.",
           "default": false
         }
       },
@@ -417,8 +421,12 @@
           "default": "no jobs"
         },
         "withVersion": {
-          "type": "boolean",
-          "description": "Add app-version input as well.",
+          "type": "string",
+          "enum": [
+            "required",
+            "optional"
+          ],
+          "description": "Add required or optional app-version input.",
           "default": false
         },
         "slackChannel": {
