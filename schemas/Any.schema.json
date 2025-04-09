@@ -3,44 +3,16 @@
   "type": "object",
   "properties": {
     "kind": {
-      "anyOf": [
-        {
-          "type": "string",
-          "const": "Example",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
-        },
-        {
-          "type": "string",
-          "const": "ActionInfo",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
-        },
-        {
-          "type": "string",
-          "const": "TemplateMetadata",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
-        },
-        {
-          "type": "string",
-          "const": "DockerPublish",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
-        },
-        {
-          "type": "string",
-          "const": "HelmDeployment",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
-        },
-        {
-          "type": "string",
-          "const": "KubeDeployment",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
-        },
-        {
-          "type": "string",
-          "const": "WorkflowInfo",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
-        }
-      ],
-      "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+      "type": "string",
+      "enum": [
+        "Example",
+        "ActionInfo",
+        "TemplateMetadata",
+        "DockerPublish",
+        "HelmDeployment",
+        "KubeDeployment",
+        "WorkflowInfo"
+      ]
     },
     "features": {
       "type": "array",

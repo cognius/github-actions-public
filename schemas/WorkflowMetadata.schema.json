@@ -8,8 +8,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "const": "TemplateMetadata",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+          "const": "TemplateMetadata"
         },
         "features": {
           "type": "array",

@@ -41,8 +41,7 @@
         },
         "kind": {
           "type": "string",
-          "const": "HelmDeployment",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+          "const": "HelmDeployment"
         },
         "features": {
           "type": "array",

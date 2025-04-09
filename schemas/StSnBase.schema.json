@@ -25,8 +25,7 @@
           "description": "The version of the schema for select parser should be parse this data."
         },
         "kind": {
-          "type": "string",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+          "type": "string"
         },
         "features": {
           "type": "array",

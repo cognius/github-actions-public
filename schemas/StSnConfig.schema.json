@@ -207,8 +207,7 @@
         },
         "kind": {
           "type": "string",
-          "const": "DockerPublish",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+          "const": "DockerPublish"
         },
         "features": {
           "type": "array",
@@ -481,8 +480,7 @@
         },
         "kind": {
           "type": "string",
-          "const": "HelmDeployment",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+          "const": "HelmDeployment"
         },
         "features": {
           "type": "array",
@@ -749,8 +747,7 @@
         },
         "kind": {
           "type": "string",
-          "const": "KubeDeployment",
-          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+          "const": "KubeDeployment"
         },
         "features": {
           "type": "array",

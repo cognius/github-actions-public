@@ -4,8 +4,7 @@
   "properties": {
     "kind": {
       "type": "string",
-      "const": "WorkflowInfo",
-      "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+      "const": "WorkflowInfo"
     },
     "features": {
       "type": "array",
