@@ -4,7 +4,8 @@
   "properties": {
     "kind": {
       "type": "string",
-      "const": "ActionInfo"
+      "const": "ActionInfo",
+      "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
     },
     "features": {
       "type": "array",
@@ -35,7 +36,8 @@
             "$ref": "#/definitions/ActionInfoFeatureSlack"
           }
         ]
-      }
+      },
+      "description": "This helps simplify user data by configure set of fields automatically based on input features and settings."
     },
     "featuresMap": {
       "type": "object",
@@ -43,38 +45,6 @@
         "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<(ActionInfoFeatureAWS|ActionInfoFeatureCache|ActionInfoFeatureCheckout|ActionInfoFeatureCommandline|ActionInfoFeatureFS|ActionInfoFeatureGHApp|ActionInfoFeatureGHToken|ActionInfoFeatureSlack)>>"
       },
       "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
-    },
-    "_features": {
-      "type": "array",
-      "minItems": 8,
-      "items": [
-        {
-          "$ref": "#/definitions/ActionInfoFeatureAWS"
-        },
-        {
-          "$ref": "#/definitions/ActionInfoFeatureCache"
-        },
-        {
-          "$ref": "#/definitions/ActionInfoFeatureCheckout"
-        },
-        {
-          "$ref": "#/definitions/ActionInfoFeatureCommandline"
-        },
-        {
-          "$ref": "#/definitions/ActionInfoFeatureFS"
-        },
-        {
-          "$ref": "#/definitions/ActionInfoFeatureGHApp"
-        },
-        {
-          "$ref": "#/definitions/ActionInfoFeatureGHToken"
-        },
-        {
-          "$ref": "#/definitions/ActionInfoFeatureSlack"
-        }
-      ],
-      "maxItems": 8,
-      "description": "This should always be empty, this if a workaround because I cannot get"
     },
     "name": {
       "type": "string",

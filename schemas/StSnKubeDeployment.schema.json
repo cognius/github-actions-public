@@ -9,7 +9,8 @@
       "type": "object",
       "properties": {
         "base": {
-          "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+          "$ref": "#/definitions/StSnKubeDeploymentV1Config",
+          "description": "The base configuration. It will be override by environment specific configuration if existed.\n\nIf it on application specific configuration, it will also overrides global base configuration as well."
         },
         "environments": {
           "type": "object",
@@ -30,21 +31,25 @@
               "$ref": "#/definitions/StSnKubeDeploymentV1Config"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "The environment specific configuration.\n\nIf it on application specific configuration, it will also overrides global environment configuration as well."
         },
         "version": {
           "type": "string",
-          "const": "v1"
+          "const": "v1",
+          "description": "The version of the schema for select parser should be parse this data."
         },
         "kind": {
           "type": "string",
-          "const": "KubeDeployment"
+          "const": "KubeDeployment",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
         },
         "features": {
           "type": "array",
           "items": {
             "not": {}
-          }
+          },
+          "description": "This helps simplify user data by configure set of fields automatically based on input features and settings."
         },
         "featuresMap": {
           "type": "object",
@@ -53,13 +58,9 @@
           },
           "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
         },
-        "_features": {
-          "$ref": "#/definitions/SchemaFeatureEmpty",
-          "description": "This should always be empty, this if a workaround because I cannot get"
-        },
         "applications": {
           "$ref": "#/definitions/StSnBaseApp<string,StSnKubeDeploymentV1Config,StSnKubeDeploymentV1Config>",
-          "description": "Optional application name to overrides default configuration"
+          "description": "The application specific configuration. This will overrides Global base configuration and Global environment configuration."
         }
       },
       "additionalProperties": false,
@@ -99,20 +100,14 @@
       "type": "object",
       "additionalProperties": false
     },
-    "SchemaFeatureEmpty": {
-      "type": "array",
-      "items": {
-        "not": {}
-      },
-      "description": "The empty schema features list (type helper)"
-    },
     "StSnBaseApp<string,StSnKubeDeploymentV1Config,StSnKubeDeploymentV1Config>": {
       "type": "object",
       "additionalProperties": {
         "type": "object",
         "properties": {
           "base": {
-            "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            "$ref": "#/definitions/StSnKubeDeploymentV1Config",
+            "description": "The base configuration. It will be override by environment specific configuration if existed.\n\nIf it on application specific configuration, it will also overrides global base configuration as well."
           },
           "environments": {
             "type": "object",
@@ -133,7 +128,8 @@
                 "$ref": "#/definitions/StSnKubeDeploymentV1Config"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "description": "The environment specific configuration.\n\nIf it on application specific configuration, it will also overrides global environment configuration as well."
           }
         },
         "additionalProperties": false

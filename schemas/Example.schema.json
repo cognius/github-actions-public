@@ -4,7 +4,8 @@
   "properties": {
     "kind": {
       "type": "string",
-      "const": "Example"
+      "const": "Example",
+      "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
     },
     "features": {
       "type": "array",
@@ -17,7 +18,8 @@
             "$ref": "#/definitions/SchemaFeature<\"b\">"
           }
         ]
-      }
+      },
+      "description": "This helps simplify user data by configure set of fields automatically based on input features and settings."
     },
     "featuresMap": {
       "type": "object",
@@ -25,10 +27,6 @@
         "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<(alias-2069939574-74-118-2069939574-0-371|alias-2069939574-118-161-2069939574-0-371)>>"
       },
       "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
-    },
-    "_features": {
-      "$ref": "#/definitions/ExampleFeatures",
-      "description": "This should always be empty, this if a workaround because I cannot get"
     },
     "name": {
       "type": "string"
@@ -93,19 +91,6 @@
     "SchemaFeatureConfig<(alias-2069939574-74-118-2069939574-0-371|alias-2069939574-118-161-2069939574-0-371)>": {
       "type": "object",
       "additionalProperties": false
-    },
-    "ExampleFeatures": {
-      "type": "array",
-      "minItems": 2,
-      "items": [
-        {
-          "$ref": "#/definitions/SchemaFeature<\"a\">"
-        },
-        {
-          "$ref": "#/definitions/SchemaFeature<\"b\">"
-        }
-      ],
-      "maxItems": 2
     }
   }
 }

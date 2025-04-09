@@ -9,7 +9,8 @@
       "type": "object",
       "properties": {
         "base": {
-          "$ref": "#/definitions/StSnHelmDeploymentV1ConfigBase"
+          "$ref": "#/definitions/StSnHelmDeploymentV1ConfigBase",
+          "description": "The base configuration. It will be override by environment specific configuration if existed.\n\nIf it on application specific configuration, it will also overrides global base configuration as well."
         },
         "environments": {
           "type": "object",
@@ -30,21 +31,25 @@
               "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "The environment specific configuration.\n\nIf it on application specific configuration, it will also overrides global environment configuration as well."
         },
         "version": {
           "type": "string",
-          "const": "v1"
+          "const": "v1",
+          "description": "The version of the schema for select parser should be parse this data."
         },
         "kind": {
           "type": "string",
-          "const": "HelmDeployment"
+          "const": "HelmDeployment",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
         },
         "features": {
           "type": "array",
           "items": {
             "not": {}
-          }
+          },
+          "description": "This helps simplify user data by configure set of fields automatically based on input features and settings."
         },
         "featuresMap": {
           "type": "object",
@@ -53,13 +58,9 @@
           },
           "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
         },
-        "_features": {
-          "$ref": "#/definitions/SchemaFeatureEmpty",
-          "description": "This should always be empty, this if a workaround because I cannot get"
-        },
         "applications": {
           "$ref": "#/definitions/StSnBaseApp<string,StSnHelmDeploymentV1ConfigBase,StSnHelmDeploymentV1ConfigEnv>",
-          "description": "Optional application name to overrides default configuration"
+          "description": "The application specific configuration. This will overrides Global base configuration and Global environment configuration."
         }
       },
       "additionalProperties": false,
@@ -75,31 +76,30 @@
       "properties": {
         "namespace": {
           "type": "string",
-          "description": "Kubernetes namespace which helm will be deploy on"
+          "description": "The Kubernetes namespace which helm will be deploy on."
         },
         "name": {
           "type": "string",
-          "description": "The name of deployment (release name)."
+          "description": "The name of the deployment (release name)."
         },
         "chart": {
           "type": "object",
           "properties": {
             "type": {
               "$ref": "#/definitions/ChartType",
-              "description": "The chart type."
+              "description": "The helm-chart type."
             },
             "name": {
               "type": "string",
-              "description": "The chart name to install. This name will append to location for oci and local type, for http, this will be name of application to install from helm-chart index.yaml file."
+              "description": "The helm-chart name to install. Name will be append to location field for oci and local. However, for http type, this is the name of the helm-chart itself. (Same name found on index.yaml file)"
             },
             "location": {
               "type": "string",
-              "description": "Chart location. Depends on type of chart. Location can be either relative path to chart directory (local), url to chart index.yaml file (http), or url to container registry (oci)."
+              "description": "The helm-chart location. Depends on type of chart. Location can be either relative path to chart directory (local), url to chart index.yaml file (http), or url to container registry (oci)."
             },
             "version": {
               "type": "string",
-              "description": "Optional chart version.",
-              "default": "latest"
+              "description": "The helm-chart version. It will default to latest if not defined."
             }
           },
           "required": [
@@ -107,7 +107,8 @@
             "name",
             "location"
           ],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "The helm-chart use for deployment."
         },
         "values": {
           "type": "array",
@@ -115,8 +116,7 @@
             "type": "string"
           },
           "minItems": 1,
-          "description": "List of values.yaml file path.",
-          "default": "current-directory"
+          "description": "List of values.yaml file path."
         },
         "overrides": {
           "type": "object",
@@ -127,18 +127,21 @@
         },
         "timeout": {
           "type": "string",
-          "description": "Helm install timeout",
-          "default": "5m"
+          "description": "The install timeout. It will default to 5m if not defined."
         },
         "force": {
           "type": "boolean",
-          "description": "Helm will force resource updates through a replacement strategy.",
-          "default": false
+          "description": "Helm will force resource updates through a replacement strategy. It will default to false if not defined.",
+          "examples": [
+            false
+          ]
         },
         "rollback": {
           "type": "boolean",
-          "description": "Automatically rollback when application cannot start within timeout.",
-          "default": true
+          "description": "Automatically rollback when application cannot start within timeout. It will default to true if not defined.",
+          "examples": [
+            true
+          ]
         }
       },
       "additionalProperties": false
@@ -161,36 +164,34 @@
             "type": "string"
           },
           "minItems": 1,
-          "description": "List of values.yaml file path.",
-          "default": "current-directory"
+          "description": "List of values.yaml file path."
         },
         "namespace": {
           "type": "string",
-          "description": "Kubernetes namespace which helm will be deploy on"
+          "description": "The Kubernetes namespace which helm will be deploy on."
         },
         "name": {
           "type": "string",
-          "description": "The name of deployment (release name)."
+          "description": "The name of the deployment (release name)."
         },
         "chart": {
           "type": "object",
           "properties": {
             "type": {
               "$ref": "#/definitions/ChartType",
-              "description": "The chart type."
+              "description": "The helm-chart type."
             },
             "name": {
               "type": "string",
-              "description": "The chart name to install. This name will append to location for oci and local type, for http, this will be name of application to install from helm-chart index.yaml file."
+              "description": "The helm-chart name to install. Name will be append to location field for oci and local. However, for http type, this is the name of the helm-chart itself. (Same name found on index.yaml file)"
             },
             "location": {
               "type": "string",
-              "description": "Chart location. Depends on type of chart. Location can be either relative path to chart directory (local), url to chart index.yaml file (http), or url to container registry (oci)."
+              "description": "The helm-chart location. Depends on type of chart. Location can be either relative path to chart directory (local), url to chart index.yaml file (http), or url to container registry (oci)."
             },
             "version": {
               "type": "string",
-              "description": "Optional chart version.",
-              "default": "latest"
+              "description": "The helm-chart version. It will default to latest if not defined."
             }
           },
           "required": [
@@ -198,7 +199,8 @@
             "name",
             "location"
           ],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "The helm-chart use for deployment."
         },
         "overrides": {
           "type": "object",
@@ -209,18 +211,21 @@
         },
         "timeout": {
           "type": "string",
-          "description": "Helm install timeout",
-          "default": "5m"
+          "description": "The install timeout. It will default to 5m if not defined."
         },
         "force": {
           "type": "boolean",
-          "description": "Helm will force resource updates through a replacement strategy.",
-          "default": false
+          "description": "Helm will force resource updates through a replacement strategy. It will default to false if not defined.",
+          "examples": [
+            false
+          ]
         },
         "rollback": {
           "type": "boolean",
-          "description": "Automatically rollback when application cannot start within timeout.",
-          "default": true
+          "description": "Automatically rollback when application cannot start within timeout. It will default to true if not defined.",
+          "examples": [
+            true
+          ]
         }
       },
       "required": [
@@ -241,20 +246,14 @@
       "type": "object",
       "additionalProperties": false
     },
-    "SchemaFeatureEmpty": {
-      "type": "array",
-      "items": {
-        "not": {}
-      },
-      "description": "The empty schema features list (type helper)"
-    },
     "StSnBaseApp<string,StSnHelmDeploymentV1ConfigBase,StSnHelmDeploymentV1ConfigEnv>": {
       "type": "object",
       "additionalProperties": {
         "type": "object",
         "properties": {
           "base": {
-            "$ref": "#/definitions/StSnHelmDeploymentV1ConfigBase"
+            "$ref": "#/definitions/StSnHelmDeploymentV1ConfigBase",
+            "description": "The base configuration. It will be override by environment specific configuration if existed.\n\nIf it on application specific configuration, it will also overrides global base configuration as well."
           },
           "environments": {
             "type": "object",
@@ -275,7 +274,8 @@
                 "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "description": "The environment specific configuration.\n\nIf it on application specific configuration, it will also overrides global environment configuration as well."
           }
         },
         "additionalProperties": false

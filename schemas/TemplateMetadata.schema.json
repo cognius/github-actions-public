@@ -7,13 +7,15 @@
       "properties": {
         "kind": {
           "type": "string",
-          "const": "TemplateMetadata"
+          "const": "TemplateMetadata",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
         },
         "features": {
           "type": "array",
           "items": {
             "not": {}
-          }
+          },
+          "description": "This helps simplify user data by configure set of fields automatically based on input features and settings."
         },
         "featuresMap": {
           "type": "object",
@@ -21,10 +23,6 @@
             "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<never>>"
           },
           "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
-        },
-        "_features": {
-          "$ref": "#/definitions/SchemaFeatureEmpty",
-          "description": "This should always be empty, this if a workaround because I cannot get"
         },
         "type": {
           "type": "string",
@@ -90,13 +88,6 @@
     "SchemaFeatureConfig<never>": {
       "type": "object",
       "additionalProperties": false
-    },
-    "SchemaFeatureEmpty": {
-      "type": "array",
-      "items": {
-        "not": {}
-      },
-      "description": "The empty schema features list (type helper)"
     }
   }
 }

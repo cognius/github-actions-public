@@ -4,7 +4,8 @@
   "properties": {
     "kind": {
       "type": "string",
-      "const": "WorkflowInfo"
+      "const": "WorkflowInfo",
+      "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
     },
     "features": {
       "type": "array",
@@ -35,7 +36,8 @@
             "$ref": "#/definitions/WorkflowInfoFeatureGit"
           }
         ]
-      }
+      },
+      "description": "This helps simplify user data by configure set of fields automatically based on input features and settings."
     },
     "featuresMap": {
       "type": "object",
@@ -43,38 +45,6 @@
         "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<(WorkflowInfoFeatureCreateRelease|WorkflowInfoFeatureEKS|WorkflowInfoFeatureGetInfo|WorkflowInfoFeatureNotifyAction|WorkflowInfoFeatureAWS|WorkflowInfoFeatureCommandline|WorkflowInfoFeatureFS|WorkflowInfoFeatureGit)>>"
       },
       "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
-    },
-    "_features": {
-      "type": "array",
-      "minItems": 8,
-      "items": [
-        {
-          "$ref": "#/definitions/WorkflowInfoFeatureCreateRelease"
-        },
-        {
-          "$ref": "#/definitions/WorkflowInfoFeatureEKS"
-        },
-        {
-          "$ref": "#/definitions/WorkflowInfoFeatureGetInfo"
-        },
-        {
-          "$ref": "#/definitions/WorkflowInfoFeatureNotifyAction"
-        },
-        {
-          "$ref": "#/definitions/WorkflowInfoFeatureAWS"
-        },
-        {
-          "$ref": "#/definitions/WorkflowInfoFeatureCommandline"
-        },
-        {
-          "$ref": "#/definitions/WorkflowInfoFeatureFS"
-        },
-        {
-          "$ref": "#/definitions/WorkflowInfoFeatureGit"
-        }
-      ],
-      "maxItems": 8,
-      "description": "This should always be empty, this if a workaround because I cannot get"
     },
     "title": {
       "type": "string",

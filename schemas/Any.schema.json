@@ -3,22 +3,51 @@
   "type": "object",
   "properties": {
     "kind": {
-      "type": "string",
-      "enum": [
-        "Example",
-        "ActionInfo",
-        "TemplateMetadata",
-        "DockerPublish",
-        "HelmDeployment",
-        "KubeDeployment",
-        "WorkflowInfo"
-      ]
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "Example",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+        },
+        {
+          "type": "string",
+          "const": "ActionInfo",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+        },
+        {
+          "type": "string",
+          "const": "TemplateMetadata",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+        },
+        {
+          "type": "string",
+          "const": "DockerPublish",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+        },
+        {
+          "type": "string",
+          "const": "HelmDeployment",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+        },
+        {
+          "type": "string",
+          "const": "KubeDeployment",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+        },
+        {
+          "type": "string",
+          "const": "WorkflowInfo",
+          "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
+        }
+      ],
+      "description": "Kind of the schema for field validation and field suggestion. This must be constant value"
     },
     "features": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/SchemaFeatureAny"
-      }
+      },
+      "description": "This helps simplify user data by configure set of fields automatically based on input features and settings."
     },
     "featuresMap": {
       "type": "object",
@@ -26,13 +55,6 @@
         "$ref": "#/definitions/ConfigWithFlag<SchemaFeatureConfig<SchemaFeatureAny>>"
       },
       "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
-    },
-    "_features": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/SchemaFeatureAny"
-      },
-      "description": "This should always be empty, this if a workaround because I cannot get"
     }
   },
   "required": [
