@@ -72,14 +72,15 @@
     },
     "StSnHelmDeploymentV1ConfigBase": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "namespace": {
-          "type": "string",
-          "description": "The Kubernetes namespace which helm will be deploy on."
-        },
         "name": {
           "type": "string",
           "description": "The name of the deployment (release name)."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The Kubernetes namespace which helm will be deploy on."
         },
         "chart": {
           "type": "object",
@@ -143,7 +144,9 @@
           ]
         }
       },
-      "additionalProperties": false
+      "required": [
+        "name"
+      ]
     },
     "ChartType": {
       "type": "string",
@@ -228,6 +231,7 @@
         }
       },
       "required": [
+        "namespace",
         "values"
       ]
     },
