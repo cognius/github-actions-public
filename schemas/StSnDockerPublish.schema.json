@@ -3,9 +3,9 @@
   "$ref": "#/definitions/StSnDockerPublishV1",
   "definitions": {
     "StSnDockerPublishV1": {
-      "$ref": "#/definitions/StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-926-262734462-0-1068,alias-1919838364-72960-73056-1919838364-0-217694<interface-262734462-54-926-262734462-0-1068>>"
+      "$ref": "#/definitions/StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-926-262734462-0-1068,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-926-262734462-0-1068>>"
     },
-    "StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-926-262734462-0-1068,alias-1919838364-72960-73056-1919838364-0-217694<interface-262734462-54-926-262734462-0-1068>>": {
+    "StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-926-262734462-0-1068,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-926-262734462-0-1068>>": {
       "type": "object",
       "properties": {
         "base": {
@@ -211,7 +211,7 @@
           "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
         },
         "applications": {
-          "$ref": "#/definitions/StSnBaseApp<string,interface-262734462-54-926-262734462-0-1068,alias-1919838364-72960-73056-1919838364-0-217694<interface-262734462-54-926-262734462-0-1068>>",
+          "$ref": "#/definitions/StSnBaseApp<string,interface-262734462-54-926-262734462-0-1068,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-926-262734462-0-1068>>",
           "description": "The application specific configuration. This will overrides Global base configuration and Global environment configuration."
         }
       },
@@ -237,7 +237,7 @@
       "type": "object",
       "additionalProperties": false
     },
-    "StSnBaseApp<string,interface-262734462-54-926-262734462-0-1068,alias-1919838364-72960-73056-1919838364-0-217694<interface-262734462-54-926-262734462-0-1068>>": {
+    "StSnBaseApp<string,interface-262734462-54-926-262734462-0-1068,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-926-262734462-0-1068>>": {
       "type": "object",
       "additionalProperties": {
         "type": "object",
