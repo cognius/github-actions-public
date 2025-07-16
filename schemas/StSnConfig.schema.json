@@ -564,6 +564,13 @@
           },
           "description": "Overrides values.yaml file using --set options. The values of this field will be parsed by handlebars template.\n\nBelow is the template variables: app: {   name: data.app,   environment: data.environment,   version: data.version,   tag: data.tag,   digest: data.digest, }"
         },
+        "overridesFile": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Overrides values.yaml file using --set-file options. The values of this field must be file path from current directory or absolute path."
+        },
         "timeout": {
           "type": "string",
           "description": "The install timeout. It will default to 5m if not defined."
@@ -649,6 +656,13 @@
             "type": "string"
           },
           "description": "Overrides values.yaml file using --set options. The values of this field will be parsed by handlebars template.\n\nBelow is the template variables: app: {   name: data.app,   environment: data.environment,   version: data.version,   tag: data.tag,   digest: data.digest, }"
+        },
+        "overridesFile": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Overrides values.yaml file using --set-file options. The values of this field must be file path from current directory or absolute path."
         },
         "timeout": {
           "type": "string",
