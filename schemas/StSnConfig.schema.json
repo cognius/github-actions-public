@@ -16,9 +16,9 @@
       "$ref": "#/definitions/StSnDockerPublishV1"
     },
     "StSnDockerPublishV1": {
-      "$ref": "#/definitions/StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-926-262734462-0-1068,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-926-262734462-0-1068>>"
+      "$ref": "#/definitions/StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-1597-262734462-0-1739,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-1597-262734462-0-1739>>"
     },
-    "StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-926-262734462-0-1068,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-926-262734462-0-1068>>": {
+    "StSnBase<\"DockerPublish\",\"v1\",interface-262734462-54-1597-262734462-0-1739,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-1597-262734462-0-1739>>": {
       "type": "object",
       "properties": {
         "base": {
@@ -45,6 +45,21 @@
               "type": "boolean",
               "description": "Set to false, will build docker image, but not push to docker registry.",
               "default": true
+            },
+            "secrets": {
+              "type": "object",
+              "properties": {
+                "githubToken": {
+                  "type": "boolean",
+                  "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                  "default": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "buildArgs": {
+              "type": "string",
+              "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
             }
           },
           "required": [
@@ -80,6 +95,21 @@
                   "type": "boolean",
                   "description": "Set to false, will build docker image, but not push to docker registry.",
                   "default": true
+                },
+                "secrets": {
+                  "type": "object",
+                  "properties": {
+                    "githubToken": {
+                      "type": "boolean",
+                      "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                      "default": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "buildArgs": {
+                  "type": "string",
+                  "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                 }
               },
               "additionalProperties": false
@@ -108,6 +138,21 @@
                   "type": "boolean",
                   "description": "Set to false, will build docker image, but not push to docker registry.",
                   "default": true
+                },
+                "secrets": {
+                  "type": "object",
+                  "properties": {
+                    "githubToken": {
+                      "type": "boolean",
+                      "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                      "default": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "buildArgs": {
+                  "type": "string",
+                  "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                 }
               },
               "additionalProperties": false
@@ -136,6 +181,21 @@
                   "type": "boolean",
                   "description": "Set to false, will build docker image, but not push to docker registry.",
                   "default": true
+                },
+                "secrets": {
+                  "type": "object",
+                  "properties": {
+                    "githubToken": {
+                      "type": "boolean",
+                      "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                      "default": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "buildArgs": {
+                  "type": "string",
+                  "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                 }
               },
               "additionalProperties": false
@@ -164,6 +224,21 @@
                   "type": "boolean",
                   "description": "Set to false, will build docker image, but not push to docker registry.",
                   "default": true
+                },
+                "secrets": {
+                  "type": "object",
+                  "properties": {
+                    "githubToken": {
+                      "type": "boolean",
+                      "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                      "default": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "buildArgs": {
+                  "type": "string",
+                  "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                 }
               },
               "additionalProperties": false
@@ -192,6 +267,21 @@
                   "type": "boolean",
                   "description": "Set to false, will build docker image, but not push to docker registry.",
                   "default": true
+                },
+                "secrets": {
+                  "type": "object",
+                  "properties": {
+                    "githubToken": {
+                      "type": "boolean",
+                      "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                      "default": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "buildArgs": {
+                  "type": "string",
+                  "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                 }
               },
               "additionalProperties": false
@@ -224,7 +314,7 @@
           "description": "This should be automatically update based on features field. Any manual update will be overwrite when parsing the data."
         },
         "applications": {
-          "$ref": "#/definitions/StSnBaseApp<string,interface-262734462-54-926-262734462-0-1068,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-926-262734462-0-1068>>",
+          "$ref": "#/definitions/StSnBaseApp<string,interface-262734462-54-1597-262734462-0-1739,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-1597-262734462-0-1739>>",
           "description": "The application specific configuration. This will overrides Global base configuration and Global environment configuration."
         }
       },
@@ -250,7 +340,7 @@
       "type": "object",
       "additionalProperties": false
     },
-    "StSnBaseApp<string,interface-262734462-54-926-262734462-0-1068,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-926-262734462-0-1068>>": {
+    "StSnBaseApp<string,interface-262734462-54-1597-262734462-0-1739,alias-1795765117-72960-73056-1795765117-0-217694<interface-262734462-54-1597-262734462-0-1739>>": {
       "type": "object",
       "additionalProperties": {
         "type": "object",
@@ -279,6 +369,21 @@
                 "type": "boolean",
                 "description": "Set to false, will build docker image, but not push to docker registry.",
                 "default": true
+              },
+              "secrets": {
+                "type": "object",
+                "properties": {
+                  "githubToken": {
+                    "type": "boolean",
+                    "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                    "default": false
+                  }
+                },
+                "additionalProperties": false
+              },
+              "buildArgs": {
+                "type": "string",
+                "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
               }
             },
             "required": [
@@ -314,6 +419,21 @@
                     "type": "boolean",
                     "description": "Set to false, will build docker image, but not push to docker registry.",
                     "default": true
+                  },
+                  "secrets": {
+                    "type": "object",
+                    "properties": {
+                      "githubToken": {
+                        "type": "boolean",
+                        "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                        "default": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "buildArgs": {
+                    "type": "string",
+                    "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                   }
                 },
                 "additionalProperties": false
@@ -342,6 +462,21 @@
                     "type": "boolean",
                     "description": "Set to false, will build docker image, but not push to docker registry.",
                     "default": true
+                  },
+                  "secrets": {
+                    "type": "object",
+                    "properties": {
+                      "githubToken": {
+                        "type": "boolean",
+                        "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                        "default": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "buildArgs": {
+                    "type": "string",
+                    "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                   }
                 },
                 "additionalProperties": false
@@ -370,6 +505,21 @@
                     "type": "boolean",
                     "description": "Set to false, will build docker image, but not push to docker registry.",
                     "default": true
+                  },
+                  "secrets": {
+                    "type": "object",
+                    "properties": {
+                      "githubToken": {
+                        "type": "boolean",
+                        "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                        "default": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "buildArgs": {
+                    "type": "string",
+                    "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                   }
                 },
                 "additionalProperties": false
@@ -398,6 +548,21 @@
                     "type": "boolean",
                     "description": "Set to false, will build docker image, but not push to docker registry.",
                     "default": true
+                  },
+                  "secrets": {
+                    "type": "object",
+                    "properties": {
+                      "githubToken": {
+                        "type": "boolean",
+                        "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                        "default": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "buildArgs": {
+                    "type": "string",
+                    "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                   }
                 },
                 "additionalProperties": false
@@ -426,6 +591,21 @@
                     "type": "boolean",
                     "description": "Set to false, will build docker image, but not push to docker registry.",
                     "default": true
+                  },
+                  "secrets": {
+                    "type": "object",
+                    "properties": {
+                      "githubToken": {
+                        "type": "boolean",
+                        "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                        "default": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "buildArgs": {
+                    "type": "string",
+                    "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
                   }
                 },
                 "additionalProperties": false
