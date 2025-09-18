@@ -272,6 +272,49 @@
                 }
               },
               "additionalProperties": false
+            },
+            "loadtest": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "string",
+                  "description": "The docker image name (do not included registry url).",
+                  "default": "redis"
+                },
+                "registry": {
+                  "type": "string",
+                  "description": "The docker registry url. This doesn't have any default from the code. However, it should default to input value on workflows if any."
+                },
+                "context": {
+                  "type": "string",
+                  "description": "The docker path context. It will default to <current-directory> if not defined."
+                },
+                "dockerfile": {
+                  "type": "string",
+                  "description": "The location of Dockerfile. It will default to Dockerfile if not defined."
+                },
+                "push": {
+                  "type": "boolean",
+                  "description": "Set to false, will build docker image, but not push to docker registry.",
+                  "default": true
+                },
+                "secrets": {
+                  "type": "object",
+                  "properties": {
+                    "githubToken": {
+                      "type": "boolean",
+                      "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                      "default": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "buildArgs": {
+                  "type": "string",
+                  "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
+                }
+              },
+              "additionalProperties": false
             }
           },
           "additionalProperties": false,
@@ -555,6 +598,49 @@
                 "additionalProperties": false
               },
               "development": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "The docker image name (do not included registry url).",
+                    "default": "redis"
+                  },
+                  "registry": {
+                    "type": "string",
+                    "description": "The docker registry url. This doesn't have any default from the code. However, it should default to input value on workflows if any."
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "The docker path context. It will default to <current-directory> if not defined."
+                  },
+                  "dockerfile": {
+                    "type": "string",
+                    "description": "The location of Dockerfile. It will default to Dockerfile if not defined."
+                  },
+                  "push": {
+                    "type": "boolean",
+                    "description": "Set to false, will build docker image, but not push to docker registry.",
+                    "default": true
+                  },
+                  "secrets": {
+                    "type": "object",
+                    "properties": {
+                      "githubToken": {
+                        "type": "boolean",
+                        "description": "Set GITHUB_TOKEN as secret on docker build context.",
+                        "default": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "buildArgs": {
+                    "type": "string",
+                    "description": "Set env var pass as build args to docker build. For secrets, please check secrets field instead."
+                  }
+                },
+                "additionalProperties": false
+              },
+              "loadtest": {
                 "type": "object",
                 "properties": {
                   "image": {

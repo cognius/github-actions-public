@@ -15,7 +15,8 @@
             "production": {},
             "staging": {},
             "testing": {},
-            "development": {}
+            "development": {},
+            "loadtest": {}
           },
           "additionalProperties": false,
           "description": "The environment specific configuration.\n\nIf it on application specific configuration, it will also overrides global environment configuration as well."
@@ -83,7 +84,8 @@
               "production": {},
               "staging": {},
               "testing": {},
-              "development": {}
+              "development": {},
+              "loadtest": {}
             },
             "additionalProperties": false,
             "description": "The environment specific configuration.\n\nIf it on application specific configuration, it will also overrides global environment configuration as well."

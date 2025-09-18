@@ -29,6 +29,9 @@
             },
             "development": {
               "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+            },
+            "loadtest": {
+              "$ref": "#/definitions/StSnKubeDeploymentV1Config"
             }
           },
           "additionalProperties": false,
@@ -124,6 +127,9 @@
                 "$ref": "#/definitions/StSnKubeDeploymentV1Config"
               },
               "development": {
+                "$ref": "#/definitions/StSnKubeDeploymentV1Config"
+              },
+              "loadtest": {
                 "$ref": "#/definitions/StSnKubeDeploymentV1Config"
               }
             },

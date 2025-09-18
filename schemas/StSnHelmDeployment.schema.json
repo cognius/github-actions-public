@@ -29,6 +29,9 @@
             },
             "development": {
               "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+            },
+            "loadtest": {
+              "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
             }
           },
           "additionalProperties": false,
@@ -288,6 +291,9 @@
                 "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
               },
               "development": {
+                "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
+              },
+              "loadtest": {
                 "$ref": "#/definitions/StSnHelmDeploymentV1ConfigEnv"
               }
             },
