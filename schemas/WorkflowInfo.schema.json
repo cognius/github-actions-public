@@ -717,14 +717,14 @@
         "env": {
           "type": "object",
           "additionalProperties": {},
-          "description": "Sets variables for all steps in job to use in the runner environment."
+          "description": "Sets variables for all steps in a job to use in the runner environment."
         },
         "outputs": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Create a map of outputs for a job. Outputs are Unicode strings, and can be a maximum of 1 MB. The total of all outputs in a workflow run can be a maximum of 50 MB."
+          "description": "Create a map of outputs for a job. Outputs are Unicode strings and can be a maximum of 1 MB. The total of all outputs in a workflow run can be a maximum of 50 MB."
         },
         "needs": {
           "type": "array",
@@ -749,8 +749,7 @@
       "additionalProperties": false
     },
     "JobDefinitionRunOn": {
-      "type": "string",
-      "const": "ubuntu-latest"
+      "type": "string"
     },
     "StepDefinition": {
       "anyOf": [
