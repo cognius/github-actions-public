@@ -861,7 +861,14 @@
           "default": "runner availability"
         },
         "matrix": {
-          "$ref": "#/definitions/JobStrategyMatrix",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/JobStrategyMatrix"
+            },
+            {
+              "type": "string"
+            }
+          ],
           "description": "Define a matrix of different job configurations."
         }
       },
