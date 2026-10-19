@@ -857,6 +857,13 @@
           "examples": [
             true
           ]
+        },
+        "skipCrds": {
+          "type": "boolean",
+          "description": "Pass --skip-crds to helm upgrade, skipping CRD installation. It will default to false if not defined.",
+          "examples": [
+            false
+          ]
         }
       },
       "required": [
@@ -949,6 +956,13 @@
           "description": "Automatically rollback when application cannot start within timeout. It will default to true if not defined.",
           "examples": [
             true
+          ]
+        },
+        "skipCrds": {
+          "type": "boolean",
+          "description": "Pass --skip-crds to helm upgrade, skipping CRD installation. It will default to false if not defined.",
+          "examples": [
+            false
           ]
         }
       },
